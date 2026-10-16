@@ -5,6 +5,7 @@ import { PRODUCT_MAP } from './data/products';
 import { OFFER_MAP } from './data/offers';
 import { MEMBERSHIP_PRICE } from './data/sections';
 import { storage, haptic, tgUser } from './lib/telegram';
+import { fetchMe } from './lib/payments';
 
 const KEY = 'cult.state.v1';
 const MONTH = 30 * 24 * 3600 * 1000;
@@ -48,6 +49,7 @@ interface AppState extends Persisted {
   toggleFav: (id: string) => void;
   say: (m: string) => void;
   hydrate: () => Promise<void>;
+  syncMembership: () => Promise<void>;
 }
 
 const emptyProfile: Profile = {
@@ -176,6 +178,13 @@ export const useApp = create<AppState>((set, get) => {
 
     say: (m) => { set({ toast: m }); setTimeout(() => set({ toast: null }), 1900); },
 
+    /** Подтянуть членство с сервера: клиентское состояние — лишь кэш. */
+    syncMembership: async () => {
+      const me = await fetchMe();
+      if (!me) return;
+      patch({ memberUntil: me.until, autoRenew: me.autoRenew });
+    },
+
     hydrate: async () => {
       const txt = await Promise.race([storage.get(KEY), new Promise<null>((r) => setTimeout(() => r(null), 2000))]);
       if (txt) {
@@ -186,10 +195,12 @@ export const useApp = create<AppState>((set, get) => {
             profile: { ...emptyProfile, ...(d.profile || {}) },
             hydrated: true,
           });
+          get().syncMembership();
           return;
         } catch { /* битое состояние — стартуем чисто */ }
       }
       set({ hydrated: true });
+      get().syncMembership();
     },
   };
 });

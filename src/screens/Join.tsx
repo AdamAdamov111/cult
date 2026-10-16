@@ -33,7 +33,8 @@ export function Join() {
     setBusy(false);
     if (r === 'cancelled') return;
     if (r === 'failed') { useApp.getState().say('Оплата не прошла. Попробуйте ещё раз'); return; }
-    join();
+    if (r === 'demo') join();              // демо-режим: активируем локально
+    else await useApp.getState().syncMembership();
     totals.club > 0 ? setTab('cart') : back();
   };
 

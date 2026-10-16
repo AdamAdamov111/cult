@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { OfferCard, ProductCard } from '../components/Cards';
 import { Chips, Empty, money } from '../components/Primitives';
 import { Cover } from '../components/Cover';
+import { BrandRow } from '../components/BrandRow';
 import { IcCrown, IcLock } from '../components/Icons';
 import { COSMETICS_CATS, SECTION_MAP } from '../data/sections';
 import { byCat } from '../data/products';
-import { offersOf } from '../data/offers';
+import { brandsOf, offersOf } from '../data/offers';
 import { useApp } from '../store';
 import { useNav } from '../router';
 import type { SectionId } from '../types';
@@ -15,17 +16,20 @@ export function Section({ id }: { id: SectionId }) {
   const member = useApp((a) => a.isMember());
   const go = useNav((n) => n.go);
   const [cat, setCat] = useState<typeof COSMETICS_CATS[number]['id']>('all');
+  const [partner, setPartner] = useState('all');
 
   const isShop = id === 'cosmetics';
   const products = isShop ? byCat(cat) : [];
-  const offers = isShop ? [] : offersOf(id);
-  const totalValue = offers.reduce((a, o) => a + (o.value || 0), 0);
+  const allOffers = isShop ? [] : offersOf(id);
+  const partners = isShop ? [] : brandsOf(id);
+  const offers = partner === 'all' ? allOffers : allOffers.filter((o) => o.brand === partner);
+  const totalValue = allOffers.reduce((a, o) => a + (o.value || 0), 0);
 
   return (
     <div className="screen">
       {/* Шапка раздела */}
       <div style={{ position: 'relative', aspectRatio: '328/150', margin: '0 0 2px' }}>
-        <Cover section={id} label={s.title} big />
+        <Cover section={id} src={s.image} label={s.title} big />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(8,8,8,.78) 6%, rgba(8,8,8,.1) 80%)' }} />
         <div style={{ position: 'absolute', inset: 0, padding: 'var(--pad)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', color: '#fff' }}>
           <span className="sbanner__kicker">{s.kicker}</span>
@@ -36,6 +40,10 @@ export function Section({ id }: { id: SectionId }) {
 
       {isShop ? (
         <>
+          <div className="block--tight">
+            <div className="block-head" style={{ paddingBottom: 9 }}><h2 className="h2">Бренды клуба</h2></div>
+            <BrandRow />
+          </div>
           <div className="block--tight"><Chips items={COSMETICS_CATS} value={cat} onChange={setCat} /></div>
           <div className="block--tight">
             {products.length
@@ -52,9 +60,15 @@ export function Section({ id }: { id: SectionId }) {
         </>
       ) : (
         <>
+          {partners.length > 1 && (
+            <div className="block--tight">
+              <Chips items={[{ id: 'all', title: 'Все партнёры' }, ...partners.map((b) => ({ id: b, title: b }))]}
+                     value={partner} onChange={setPartner} />
+            </div>
+          )}
           <div className="pad block--tight">
             <div className="note">
-              {offers.length} предложений в разделе · выгода до {money(totalValue)}.
+              {allOffers.length} предложений в разделе · выгода до {money(totalValue)}.
               {member ? ' Промокод выдаётся внутри карточки.' : ' Доступ — после вступления в клуб.'}
             </div>
           </div>

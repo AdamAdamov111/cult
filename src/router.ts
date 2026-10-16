@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { SectionId } from './types';
+import type { SectionId, Target } from './types';
 import { haptic } from './lib/telegram';
 
 export type Tab = 'home' | 'catalog' | 'cart' | 'profile';
@@ -8,6 +8,7 @@ export type Route =
   | { k: 'product'; id: string }
   | { k: 'offer'; id: string }
   | { k: 'section'; id: SectionId }
+  | { k: 'brand'; id: string }
   | { k: 'join' }
   | { k: 'orders' }
   | { k: 'coupons' }
@@ -68,3 +69,16 @@ export const useNav = create<Nav>((set, get) => ({
     return s.length ? s[s.length - 1] : null;
   },
 }));
+
+/** Единая точка перехода по «цели» баннера или сторис. */
+export function goTarget(t: Target) {
+  const { go } = useNav.getState();
+  switch (t.t) {
+    case 'product': return go({ k: 'product', id: t.id });
+    case 'offer':   return go({ k: 'offer', id: t.id });
+    case 'brand':   return go({ k: 'brand', id: t.id });
+    case 'section': return go({ k: 'section', id: t.id });
+    case 'join':    return go({ k: 'join' });
+    case 'external': window.open(t.url, '_blank', 'noopener'); return;
+  }
+}

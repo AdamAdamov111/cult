@@ -1,0 +1,26 @@
+{
+ "slug": "medsi",
+ "url": "https://medsi.ru",
+ "pages": [
+  {
+   "url": "https://medsi.ru",
+   "title": "Сеть клиник и медицинских центров МЕДСИ -  Клинико-диагностические центры, детские клиники и клинические больницы - Официальный сайт",
+   "desc": "Официальный сайт сети медицинских клиник МЕДСИ в Москве и по всей России. Широкий выбор услуг для взрослых и детей, консультации врачей, новейшее оборудование для диагностики, лечение в стационарах.",
+   "og": "https://medsi.ru/upload/img/img_share_new4.png",
+   "headings": [
+    "Официальный сайт сети клиник и медицинских центров МЕДСИ"
+   ],
+   "images": [
+    "https://medsi.ru/upload/webp/90/local/templates/medsi/img/icon-24-7-mob.webp",
+    "https://medsi.ru/upload/medialibrary/de9/laxl7n0ifqy6eynujhpbjnemplfqqyul.png",
+    "https://medsi.ru/upload/webp/90/local/templates/medsi/img/gynecology/smartMed.webp",
+    "https://medsi.ru/upload/accord_settings/bc9/t4hlq9or22fofu1xu0kyeyd71fvmbsc3.png",
+    "https://medsi.ru/upload/webp/90/local/components/medsi/map/templates/-default/map-main-img.webp",
+    "https://medsi.ru/upload/medialibrary/b9e/uxr7kmxvqutoqodhr4ux1l4ohheukzh1.png",
+    "https://medsi.ru/upload/medialibrary/b7c/mr607c90194w04c1d0gxlwpp179vdzwd.png",
+    "https://medsi.ru/upload/webp/90/frontend/medsi-v2/build/assets/images/demo/slide-info@2x.webp"
+   ],
+   "prices": []
+  }
+ ]
+}

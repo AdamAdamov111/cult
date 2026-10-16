@@ -8,6 +8,7 @@ import { Profile, Orders, Coupons } from './screens/Profile';
 import { Section } from './screens/Section';
 import { Product } from './screens/Product';
 import { Offer } from './screens/Offer';
+import { Brand } from './screens/Brand';
 import { Join } from './screens/Join';
 import { useNav, type Route } from './router';
 import { useApp } from './store';
@@ -16,6 +17,7 @@ import { initTelegram, setBackButton, setMainButton } from './lib/telegram';
 import { PRODUCT_MAP } from './data/products';
 import { OFFER_MAP } from './data/offers';
 import { SECTION_MAP } from './data/sections';
+import { BRAND_MAP } from './data/brands';
 import { Skel } from './components/Primitives';
 import { ErrorBoundary } from './components/ErrorBoundary';
 
@@ -25,6 +27,7 @@ function titleOf(r: Route | null): string | undefined {
     case 'product': return PRODUCT_MAP.get(r.id)?.title;
     case 'offer': return OFFER_MAP.get(r.id)?.brand;
     case 'section': return SECTION_MAP[r.id].title;
+    case 'brand': return BRAND_MAP.get(r.id)?.title;
     case 'join': return 'Членство CULT';
     case 'orders': return 'Заказы';
     case 'coupons': return 'Купоны';
@@ -39,6 +42,7 @@ function Screen({ route, tab }: { route: Route | null; tab: string }) {
       case 'product': return <Product id={route.id} />;
       case 'offer': return <Offer id={route.id} />;
       case 'section': return <Section id={route.id} />;
+      case 'brand': return <Brand id={route.id} />;
       case 'join': return <Join />;
       case 'orders': return <Orders />;
       case 'coupons': return <Coupons />;

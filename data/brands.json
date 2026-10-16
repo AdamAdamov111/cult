@@ -1,0 +1,761 @@
+[
+ {
+  "id": "greymy",
+  "title": "GREYMY",
+  "country": "Швейцария",
+  "about": "Профессиональный уход за волосами: маски, шампуни, несмываемые средства и стайлинг.",
+  "discount": 0.35,
+  "site": "https://greymy.ru",
+  "products": [
+   {
+    "title": "BRILLIANT MASK",
+    "subtitle": "Бриллиантовая маска",
+    "rrp": 4830,
+    "image": "img/p/greymy-0.jpg",
+    "url": "https://greymy.ru/product/greymy-brilliant-mask-200ml/",
+    "club": 3140,
+    "src": "https://greymy.ru/upload/webp/iblock/d35/vqbligovx1jh5yue23y849n30s1hwnf1.webp"
+   },
+   {
+    "title": "SHINE SHAMPOO",
+    "subtitle": "Шампунь для блеска",
+    "rrp": 4600,
+    "image": "img/p/greymy-1.jpg",
+    "url": "https://greymy.ru/product/greymy-shine-shampoo-200ml/",
+    "club": 2990,
+    "src": "https://greymy.ru/upload/webp/iblock/ed0/ok6cn9tjbm4dvphn4w6qgi0icnbmc6p7.webp"
+   },
+   {
+    "title": "TRAVEL ESSENTIALS KIT",
+    "subtitle": "Дорожный набор для ухода за волосами",
+    "rrp": 5500,
+    "image": "img/p/greymy-2.jpg",
+    "url": "https://greymy.ru/product/travel-essentials-kit/",
+    "club": 3580,
+    "src": "https://greymy.ru/upload/webp/iblock/81a/re2oc6ntugmezamyejxll7elu176ln6x.webp"
+   },
+   {
+    "title": "IMPROVING MASK",
+    "subtitle": "Совершенствующая маска",
+    "rrp": 4227,
+    "image": "img/p/greymy-3.jpg",
+    "url": "https://greymy.ru/product/greymy-improving-mask-200ml/",
+    "club": 2750,
+    "src": "https://greymy.ru/upload/webp/iblock/bf2/7cxo3ltw0smt8hb034t3hunb0wkgapr3.webp"
+   },
+   {
+    "title": "MOROCCO ARGAN OIL",
+    "subtitle": "Марокканское Аргановое Масло",
+    "rrp": 4600,
+    "image": "img/p/greymy-4.jpg",
+    "url": "https://greymy.ru/product/greymy-morocco-arganoil-50ml/",
+    "club": 2990,
+    "src": "https://greymy.ru/upload/webp/iblock/e07/j2qu9qdkehrtp9ic386q0we73lgs8luk.webp"
+   },
+   {
+    "title": "CLARIFYING SHAMPOO",
+    "subtitle": "Шампунь для глубокого очищения",
+    "rrp": 8223,
+    "image": "img/p/greymy-5.jpg",
+    "url": "https://greymy.ru/product/clarifying-shampoo/",
+    "club": 5340,
+    "src": "https://greymy.ru/upload/webp/iblock/6eb/otnk07dd70kbn51a8st30sfjqttn0c1w.webp"
+   },
+   {
+    "title": "Набор \"Luxury Shine\"",
+    "subtitle": "Набор \"Роскошное сияние\"",
+    "rrp": 7999,
+    "image": "img/p/greymy-6.jpg",
+    "url": "https://greymy.ru/product/nabor-luxury-shine/",
+    "club": 5200,
+    "src": "https://greymy.ru/upload/webp/iblock/ef9/alu8mtj9rcpbhil3yc4m2zmfpydhs445.webp"
+   },
+   {
+    "title": "STARLIGHT HOT STYLER - ЦИФРОВЫЕ ЩИПЦЫ ДЛЯ ВОЛОС",
+    "subtitle": "Звездный горячий стайлер",
+    "rrp": 22000,
+    "image": "img/p/greymy-7.jpg",
+    "url": "https://greymy.ru/product/greymy-nano-titanium-flat-iron-tsifrovye-shhiptsy-dlja-volos-titanium/",
+    "club": 14300,
+    "src": "https://greymy.ru/upload/webp/iblock/ed7/sf2jhaeigposqjd2t3aw6lxrputx2fc7.webp"
+   },
+   {
+    "title": "SHINE CONDITIONER",
+    "subtitle": "Кондиционер для блеска",
+    "rrp": 4600,
+    "image": "img/p/greymy-8.jpg",
+    "url": "https://greymy.ru/product/greymy-shine-conditioner-200ml/",
+    "club": 2990,
+    "src": "https://greymy.ru/upload/webp/iblock/446/pq707c3tmcmc32bwiu3cv6gpmdkd276s.webp"
+   },
+   {
+    "title": "GOLD HAIR KERATIN TREATMENT",
+    "subtitle": "Голд кератиновый крем для выпрямления волос с частицами золота",
+    "rrp": 27600,
+    "image": "img/p/greymy-9.jpg",
+    "url": "https://greymy.ru/product/keratin-dlja-volos-gold-hair-keratin/",
+    "club": 17940,
+    "src": "https://greymy.ru/upload/iblock/3cf/wg6bdkjjot2uenkiuop9k12id3lq5b0e.PNG"
+   },
+   {
+    "title": "PLUMPING VOLUME SHAMPOO",
+    "subtitle": "Уплотняющий шампунь для объема",
+    "rrp": 3910,
+    "image": "img/p/greymy-10.jpg",
+    "url": "https://greymy.ru/product/greymy-plumping-volume-shampoo-250ml/",
+    "club": 2540,
+    "src": "https://greymy.ru/upload/webp/iblock/0ca/bxr2dkvfzdbj0t7rpvd1zk98sou7ysue.webp"
+   },
+   {
+    "title": "INSTANT SHINE PERFUME SPRAY",
+    "subtitle": "Спрей-усилитель блеска и цвета",
+    "rrp": 4600,
+    "image": "img/p/greymy-11.jpg",
+    "url": "https://greymy.ru/product/greymy-instant-shine-perfume-spray/",
+    "club": 2990,
+    "src": "https://greymy.ru/upload/webp/iblock/8a3/2vgkzro9ozoli2qmzem5epf7m31a3r1d.webp"
+   },
+   {
+    "title": "PLATINUM EXPRESS HAIR KERATIN TREATMENT",
+    "subtitle": "Платинум экспресс кератиновый крем для разглаживания волос",
+    "rrp": 4600,
+    "image": "img/p/greymy-12.jpg",
+    "url": "https://greymy.ru/product/express-hair-keratin-treatment-100ml/",
+    "club": 2990,
+    "src": "https://greymy.ru/upload/iblock/3f3/fmp38zmrgi9a5li7pz451ff1exdots8y.PNG"
+   },
+   {
+    "title": "DIAMOND SHINE SET",
+    "subtitle": "Подарочный набор \"Бриллиантовый блеск\"",
+    "rrp": 13800,
+    "image": "img/p/greymy-13.jpg",
+    "url": "https://greymy.ru/product/podarochnyy-nabor-brilliantovyy-blesk/",
+    "club": 8970,
+    "src": "https://greymy.ru/upload/webp/iblock/a5d/5qy3nmixpo3pz2ajrz7wt68365vruhe8.webp"
+   },
+   {
+    "title": "PROTEIN INFUSION THERAPY",
+    "subtitle": "Ампулы Rx100 концентрат кератина + гидроколлаген",
+    "rrp": 5175,
+    "image": "img/p/greymy-14.jpg",
+    "url": "https://greymy.ru/product/ampuly-rx100-koncentrat-keratinagidrokollagen/",
+    "club": 3360,
+    "src": "https://greymy.ru/upload/webp/iblock/837/aoptf6m6qnq50lkkd2fvhjt41p0bsca1.webp"
+   },
+   {
+    "title": "SILVER RESULT HAIR KERATIN TREATMENT",
+    "subtitle": "Сильвер резальт кератиновый крем для восстановления и выпрямления волос",
+    "rrp": 19550,
+    "image": "img/p/greymy-15.jpg",
+    "url": "https://greymy.ru/product/silver-result-hair-keratin-treatment-500ml/",
+    "club": 12710,
+    "src": "https://greymy.ru/upload/iblock/d0e/3wlbutk6vm6zvij5xkegeofcnvey9c7p.PNG"
+   },
+   {
+    "title": "ZOOM COLOR IMPRESSIVE DEPTH SET",
+    "subtitle": "Набор для окрашенных волос Впечатляющая глубина",
+    "rrp": 11500,
+    "image": "img/p/greymy-16.jpg",
+    "url": "https://greymy.ru/product/nabor-dlya-okrashennykh-volos/",
+    "club": 7480,
+    "src": "https://greymy.ru/upload/webp/iblock/e40/tpm25htlqjdkzw9dxfcofey6mnc2zfo2.webp"
+   },
+   {
+    "title": "ZOOM COLOR CARE MASK",
+    "subtitle": "Оптическая маска для окрашенных волос",
+    "rrp": 3680,
+    "image": "img/p/greymy-17.jpg",
+    "url": "https://greymy.ru/product/greymy-zoom-color-mask-150ml/",
+    "club": 2390,
+    "src": "https://greymy.ru/upload/webp/iblock/a37/s8rk45cqlv214lcy98xa0e9l92mi41c3.webp"
+   },
+   {
+    "title": "HYDRA TWIN ACTION SPRAY",
+    "subtitle": "Спрей двойного действия для увлажнения и защиты",
+    "rrp": 4715,
+    "image": "img/p/greymy-18.jpg",
+    "url": "https://greymy.ru/product/greymy-zoom-color-hydra-twin-action-spray/",
+    "club": 3060,
+    "src": "https://greymy.ru/upload/webp/iblock/622/s1w4u8fq1t5spv55a0j7cv4b4o9t1dkc.webp"
+   },
+   {
+    "title": "ZOOM COLOR SHAMPOO",
+    "subtitle": "Оптический шампунь для окрашенных волос",
+    "rrp": 3910,
+    "image": "img/p/greymy-19.jpg",
+    "url": "https://greymy.ru/product/greymy-zoom-color-shampoo-250ml/",
+    "club": 2540,
+    "src": "https://greymy.ru/upload/webp/iblock/4e8/rsnox2pdflxjefx931jiy1bqayi6sh7x.webp"
+   },
+   {
+    "title": "AWESOME SMOOTHING BALM",
+    "subtitle": "Разглаживающий бальзам",
+    "rrp": 5060,
+    "image": "img/p/greymy-20.jpg",
+    "url": "https://greymy.ru/product/greymy-awesome-smoothing-balm/",
+    "club": 3290,
+    "src": "https://greymy.ru/upload/webp/iblock/a41/m7c2fuviecwoip6nvvo2w6hcs0hhe88h.webp"
+   },
+   {
+    "title": "WILD TEXTURIZING SOFT CREAM",
+    "subtitle": "Невесомый крем для первозданной текстуры",
+    "rrp": 3680,
+    "image": "img/p/greymy-21.jpg",
+    "url": "https://greymy.ru/product/wild-texturizing-soft-cream/",
+    "club": 2390,
+    "src": "https://greymy.ru/upload/webp/iblock/708/eo6t9hta47o90y10x448nln3373hr8x4.webp"
+   },
+   {
+    "title": "ZOOM COLOR CONDITIONER",
+    "subtitle": "Оптический кондиционер для окрашенных волос",
+    "rrp": 3910,
+    "image": "img/p/greymy-22.jpg",
+    "url": "https://greymy.ru/product/greymy-zoom-color-conditioner-250ml/",
+    "club": 2540,
+    "src": "https://greymy.ru/upload/webp/iblock/67a/c7q98uxywbi84s33a7w0lq5mnr9ruec1.webp"
+   },
+   {
+    "title": "PLUMPING VOLUME CONDITIONER",
+    "subtitle": "Уплотняющий кондиционер для объема",
+    "rrp": 3910,
+    "image": "img/p/greymy-23.jpg",
+    "url": "https://greymy.ru/product/greymy-plumping-volume-conditioner-250ml/",
+    "club": 2540,
+    "src": "https://greymy.ru/upload/webp/iblock/da8/5lqewj44s7fr5uwy0uxzj35s0xxlgjsm.webp"
+   },
+   {
+    "title": "SMART TWIST CURL SPRAY",
+    "subtitle": "Моделирующий спрей для создания локонов",
+    "rrp": 3220,
+    "image": "img/p/greymy-24.jpg",
+    "url": "https://greymy.ru/product/greymy-smart-twist-curl-spray/",
+    "club": 2090,
+    "src": "https://greymy.ru/upload/webp/iblock/860/ieylu7m3cc3ppoiegvs7btl0qa1blu3l.webp"
+   },
+   {
+    "title": "VOLUMIZING DRY REFRESH SHAMPOO - BROWN",
+    "subtitle": "Сухой шампунь для темных волос",
+    "rrp": 3680,
+    "image": "img/p/greymy-25.jpg",
+    "url": "https://greymy.ru/product/greymy-volumizing-dry-refresh-shampoo-brown/",
+    "club": 2390,
+    "src": "https://greymy.ru/upload/webp/iblock/41a/dk9a4y9h7mb1sjn6zgp4rpdgpob36ya1.webp"
+   },
+   {
+    "title": "ZOOM COLOR SET MINI",
+    "subtitle": "Набор миниатюр color для окрашенных волос",
+    "rrp": 6210,
+    "image": "img/p/greymy-26.jpg",
+    "url": "https://greymy.ru/product/nabor-miniatyur-color-dlya-ukhoda-za-okrashennymi-i-naturalnymi-volosami/",
+    "club": 4040,
+    "src": "https://greymy.ru/upload/webp/iblock/e82/59pycxmy5gytmgstau4g15hiq6j86bi3.webp"
+   }
+  ]
+ },
+ {
+  "id": "oribe",
+  "title": "ORIBE",
+  "country": "США",
+  "about": "Культовый салонный бренд: уход и стайлинг премиального класса.",
+  "discount": 0.3,
+  "site": "https://authentica.love/catalog/brands/oribe/",
+  "products": [
+   {
+    "title": "Увлажняющий кондиционер «Непревзойденный блеск»",
+    "subtitle": "",
+    "rrp": 8470,
+    "image": "img/p/oribe-0.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/konditsionery/uvlazhnyayushchiy_konditsioner_neprevzoydennyy_blesk_/",
+    "club": 5930,
+    "src": "https://authentica.love/upload/iblock/460/vid9ca4fxtlcme2p8lw110ww92hzy8hb.webp"
+   },
+   {
+    "title": "Увлажняющий шампунь «Непревзойденный блеск»",
+    "subtitle": "",
+    "rrp": 8150,
+    "image": "img/p/oribe-1.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/shampuni/uvlazhnyayushchiy_shampun_neprevzoydennyy_blesk/",
+    "club": 5700,
+    "src": "https://authentica.love/upload/iblock/bb2/nh1ax0uvcaeb5yqv3eft67eak9s40qz0.webp"
+   },
+   {
+    "title": "Набор «Роскошь Золота» Gold Lust Travel Set",
+    "subtitle": "",
+    "rrp": 10310,
+    "image": "img/p/oribe-2.jpg",
+    "url": "https://authentica.love/catalog/volosy/nabory_dlya_ukhoda_za_volosami/nabor_roskosh_zolota_gold_lust_travel_set/",
+    "club": 7220,
+    "src": "https://authentica.love/upload/iblock/a42/sl1ejd4sd1l0ei8zn63w627t17y4iets.webp"
+   },
+   {
+    "title": "Уплотняющий спрей-уход «Истинная гармония»",
+    "subtitle": "",
+    "rrp": 11700,
+    "image": "img/p/oribe-3.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/nesmyvaemyy_ukhod/uplotnyayushchiy_sprey_ukhod_istinnaya_garmoniya_/",
+    "club": 8190,
+    "src": "https://authentica.love/upload/iblock/380/qz5dj3r5aybp0r9ic3c28i05e40ixz4j.webp"
+   },
+   {
+    "title": "Сыворотка-уход \"Зеркальный блеск\"",
+    "subtitle": "",
+    "rrp": 10610,
+    "image": "img/p/oribe-4.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/syvorotki_dlya_volos/syvorotka_ukhod_zerkalnyy_blesk/",
+    "club": 7430,
+    "src": "https://authentica.love/upload/iblock/602/37m64j013dyme8uekjnh6mpnt97z3lxo.webp"
+   },
+   {
+    "title": "Восстанавливающее мыло для рук \"Долина Цветов\"",
+    "subtitle": "",
+    "rrp": 6840,
+    "image": "img/p/oribe-5.jpg",
+    "url": "https://authentica.love/catalog/telo/gigiena/mylo/vosstanavlivayushchee_mylo_dlya_ruk_dolina_tsvetov/",
+    "club": 4790,
+    "src": "https://authentica.love/upload/iblock/cc1/zj4glyn4atrt3khubm7fgkhw80malll2.webp"
+   },
+   {
+    "title": "Интенсивный крем для рук \"Оазис в Пустыне\"",
+    "subtitle": "",
+    "rrp": 9280,
+    "image": "img/p/oribe-6.jpg",
+    "url": "https://authentica.love/catalog/telo/ukhod_za_rukami/kremy_i_geli_dlya_ruk/intensivnyy_krem_dlya_ruk_oazis_v_pustyne/",
+    "club": 6500,
+    "src": "https://authentica.love/upload/iblock/76e/zr99x32b7mfh6unyszmy6f22kb4wy53h.webp"
+   },
+   {
+    "title": "Бальзам для создания естественной укладки \"Сила Возрождения\"",
+    "subtitle": "",
+    "rrp": 7950,
+    "image": "img/p/oribe-7.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/balzamy_i_losony_dlya_volos/balzam_dlya_sozdaniya_estestvennoy_ukladki_sila_vozrozhdeniya/",
+    "club": 5560,
+    "src": "https://authentica.love/upload/iblock/a49/wazyw41ydxnujim5gtmgi15xd2cu7j2s.webp"
+   },
+   {
+    "title": "Сыворотка-уход для сохранения свежести кожи головы",
+    "subtitle": "",
+    "rrp": 9720,
+    "image": "img/p/oribe-8.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/syvorotki_dlya_volos/syvorotka_ukhod_dlya_sokhraneniya_svezhesti_kozhi_golovy/",
+    "club": 6800,
+    "src": "https://authentica.love/upload/iblock/4e3/9gcmsdfneiwzqq3eekbgh7yogkf7xkju.webp"
+   },
+   {
+    "title": "Шампунь для сохранения свежести волос и кожи головы",
+    "subtitle": "",
+    "rrp": 8590,
+    "image": "img/p/oribe-9.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/shampuni/shampun_dlya_sokhraneniya_svezhesti_volos_i_kozhi_golovy/",
+    "club": 6010,
+    "src": "https://authentica.love/upload/iblock/97a/tjsurwzarce3gvz6ncidqvmim1ul0uit.webp"
+   },
+   {
+    "title": "Роскошное мыло с ароматом \"Долина цветов\"",
+    "subtitle": "",
+    "rrp": 5060,
+    "image": "img/p/oribe-10.jpg",
+    "url": "https://authentica.love/catalog/telo/gigiena/mylo/roskoshnoe_mylo_s_aromatom_dolina_tsvetov/",
+    "club": 3540,
+    "src": "https://authentica.love/upload/iblock/3b4/khn2iks7xx2c2prrjp41oaf2kfe1ult1.webp"
+   },
+   {
+    "title": "Роскошное мыло с ароматом \"Оазис в пустыне\"",
+    "subtitle": "",
+    "rrp": 5060,
+    "image": "img/p/oribe-11.jpg",
+    "url": "https://authentica.love/catalog/telo/gigiena/mylo/roskoshnoe_mylo_s_aromatom_oazis_v_pustyne/",
+    "club": 3540,
+    "src": "https://authentica.love/upload/iblock/212/udw2qpsnz0cnb0sqa5l2s1pofju98ihb.webp"
+   },
+   {
+    "title": "Сухой термозащитный спрей-уход \"Роскошь золота\"",
+    "subtitle": "",
+    "rrp": 7700,
+    "image": "img/p/oribe-12.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/nesmyvaemyy_ukhod/sukhoy_termozashchitnyy_sprey_ukhod_roskosh_zolota/",
+    "club": 5390,
+    "src": "https://authentica.love/upload/iblock/67b/obzbfrf5dmrjzd2weu9ddjshkoo5vlk5.webp"
+   },
+   {
+    "title": "Пробуждающий гель для душа \"Оазис в Пустыне\"",
+    "subtitle": "",
+    "rrp": 8470,
+    "image": "img/p/oribe-13.jpg",
+    "url": "https://authentica.love/catalog/telo/gigiena/gel_dlya_dusha/probuzhdayushchiy_gel_dlya_dusha_oazis_v_pustyne/",
+    "club": 5930,
+    "src": "https://authentica.love/upload/iblock/ca8/99ezlpuzeazewa9aaln8ugkd6z1n98g5.webp"
+   },
+   {
+    "title": "Пробуждающий гель для душа \"Долина Цветов\"",
+    "subtitle": "",
+    "rrp": 8470,
+    "image": "img/p/oribe-14.jpg",
+    "url": "https://authentica.love/catalog/telo/gigiena/gel_dlya_dusha/probuzhdayushchiy_gel_dlya_dusha_dolina_tsvetov/",
+    "club": 5930,
+    "src": "https://authentica.love/upload/iblock/d33/f428hl405wkh6s0cjcuvo3enxed2npku.webp"
+   },
+   {
+    "title": "Спрей-мусс \"Текстура и фиксация\"",
+    "subtitle": "",
+    "rrp": 6790,
+    "image": "img/p/oribe-15.jpg",
+    "url": "https://authentica.love/catalog/neraspredelennye/sprey_muss_tekstura_i_fiksatsiya/",
+    "club": 4750,
+    "src": "https://authentica.love/upload/iblock/820/o3hqp3kniknq2twvp496i0t3un0upph8.webp"
+   },
+   {
+    "title": "Шампунь против ломкости и сухости волос \"Сила Возрождения\"",
+    "subtitle": "",
+    "rrp": 8470,
+    "image": "img/p/oribe-16.jpg",
+    "url": "https://authentica.love/catalog/neraspredelennye/shampun_protiv_lomkosti_i_sukhosti_volos_sila_vozrozhdeniya/",
+    "club": 5930,
+    "src": "https://authentica.love/upload/iblock/1b0/iiys7poms00xr2emzkg61zxrwhzskhsv.webp"
+   },
+   {
+    "title": "Кондиционер против ломкости и сухости волос \"Сила Возрождения\"",
+    "subtitle": "",
+    "rrp": 7950,
+    "image": "img/p/oribe-17.jpg",
+    "url": "https://authentica.love/catalog/neraspredelennye/konditsioner_protiv_lomkosti_i_sukhosti_volos_sila_vozrozhdeniya/",
+    "club": 5560,
+    "src": "https://authentica.love/upload/iblock/b4c/0e59p5w650ps1dkncp83bk8lb0vsuvlj.webp"
+   },
+   {
+    "title": "Насыщенный крем для тела \"Долина Цветов\"",
+    "subtitle": "",
+    "rrp": 11870,
+    "image": "img/p/oribe-18.jpg",
+    "url": "https://authentica.love/catalog/telo/ukhod_za_telom/kremy_i_geli_dlya_tela/nasyshchennyy_krem_dlya_tela_dolina_tsvetov/",
+    "club": 8310,
+    "src": "https://authentica.love/upload/iblock/5f8/ax127rbvkoxmtc8h7g8n53wvexc5k8c7.webp"
+   },
+   {
+    "title": "Насыщенный крем для тела \"Оазис в Пустыне\"",
+    "subtitle": "",
+    "rrp": 11870,
+    "image": "img/p/oribe-19.jpg",
+    "url": "https://authentica.love/catalog/telo/ukhod_za_telom/kremy_i_geli_dlya_tela/nasyshchennyy_krem_dlya_tela_oazis_v_pustyne/",
+    "club": 8310,
+    "src": "https://authentica.love/upload/iblock/19f/1eauvf2o01egnr3s3ukvvep5pvnh3jpm.webp"
+   },
+   {
+    "title": "Спрей для насыщенного объема Maximista",
+    "subtitle": "",
+    "rrp": 4810,
+    "image": "img/p/oribe-20.jpg",
+    "url": "https://authentica.love/catalog/neraspredelennye/sprey-dlya-nasyshchennogo-obema-maximista-200/",
+    "club": 3370,
+    "src": "https://authentica.love/upload/iblock/3d6/io4m5ndkjbri0sn4x0siov52p4geyz3w.webp"
+   },
+   {
+    "title": "Спрей Apres Beach",
+    "subtitle": "",
+    "rrp": 6790,
+    "image": "img/p/oribe-21.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/sprei_dlya_ukladki/sprey_apres_beach_310/",
+    "club": 4750,
+    "src": "https://authentica.love/upload/iblock/c33/n31y62zk0bbrmg4fgoil962gdb5nqmk6.webp"
+   },
+   {
+    "title": "Cote d`Azur Scented Candle/Ароматическая свеча \"Лазурный берег\"",
+    "subtitle": "",
+    "rrp": 13260,
+    "image": "img/p/oribe-22.jpg",
+    "url": "https://authentica.love/catalog/podarki/dlya_doma/svechi/cote_d_azur_scented_candle_aromaticheskaya_svecha_lazurnyy_bereg/",
+    "club": 9280,
+    "src": "https://authentica.love/upload/iblock/8e0/jtzwb3kn3ju60x15ucuuw4ejm3tbhmdd.webp"
+   },
+   {
+    "title": "Br. Blonde Radiance & Repair Treat./Бальзам-уход для светлых волос ''Сияние и Восстановление''",
+    "subtitle": "",
+    "rrp": 10610,
+    "image": "img/p/oribe-23.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/konditsionery/br_blonde_radiance_repair_treat_balzam_ukhod_dlya_svetlykh_volos_siyanie_i_vosstanovlenie_/",
+    "club": 7430,
+    "src": "https://authentica.love/upload/iblock/1aa/99zq2pyz1qtt1vwstno5yowsqtjmq9b4.webp"
+   },
+   {
+    "title": "Пробуждающий гель для душа \"Лазурный берег\" Cote d'Azur",
+    "subtitle": "",
+    "rrp": 8470,
+    "image": "img/p/oribe-24.jpg",
+    "url": "https://authentica.love/catalog/neraspredelennye/probuzhdayushchiy_gel_dlya_dusha_lazurnyy_bereg_cote_d_azur/",
+    "club": 5930,
+    "src": "https://authentica.love/upload/iblock/bb1/26qvr8vg7nzcisyuknxqlwqd5inqq7xc.webp"
+   },
+   {
+    "title": "Насыщенный крем для тела \"Лазурный берег\" Cote d'Azur",
+    "subtitle": "",
+    "rrp": 11870,
+    "image": "img/p/oribe-25.jpg",
+    "url": "https://authentica.love/catalog/telo/ukhod_za_telom/kremy_i_geli_dlya_tela/nasyshchennyy_krem_dlya_tela_lazurnyy_bereg_cote_d_azur/",
+    "club": 8310,
+    "src": "https://authentica.love/upload/iblock/b1c/8dd8sybljga7z3mp63rr61wtzgnylei1.webp"
+   },
+   {
+    "title": "Шампунь для облегчения расчесывания волос Run-Through Detangling",
+    "subtitle": "",
+    "rrp": 8650,
+    "image": "img/p/oribe-26.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/shampuni/shampun_dlya_oblegcheniya_raschesyvaniya_volos_run_through_detangling/",
+    "club": 6060,
+    "src": "https://authentica.love/upload/iblock/b69/c6do3vpyl5urkktr8463e1at8cx1rdvq.webp"
+   },
+   {
+    "title": "Восстанавливающий шампунь «Роскошь золота» Gold Lust",
+    "subtitle": "",
+    "rrp": 2960,
+    "image": "img/p/oribe-27.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/shampuni/vosstanavlivayushchiy_shampun_roskosh_zolota_gold_lust/",
+    "club": 2070,
+    "src": "https://authentica.love/upload/iblock/97d/scx9cn72z1iihagv9m6qz2l15qshnkij.webp"
+   }
+  ]
+ },
+ {
+  "id": "kevinmurphy",
+  "title": "KEVIN MURPHY",
+  "country": "Австралия",
+  "about": "Уход за волосами на натуральных активах, вес формулы — как у средств для кожи.",
+  "discount": 0.3,
+  "site": "https://authentica.love/catalog/brands/kevin_murphy/",
+  "products": [
+   {
+    "title": "Набор DREAM AND GLOW сыворотка + масло+патчи",
+    "subtitle": "",
+    "rrp": 11310,
+    "image": "img/p/kevinmurphy-0.jpg",
+    "url": "https://authentica.love/catalog/volosy/nabory_dlya_ukhoda_za_volosami/nabor_dream_and_glow_syvorotka_maslo_patchi/",
+    "club": 7920,
+    "src": "https://authentica.love/upload/iblock/b9a/b85t873c1qhuup5rtcmpcr8f50q32kja.webp"
+   },
+   {
+    "title": "Набор НАЙТ.ШИФТ сыворотка и спрей + патчи",
+    "subtitle": "",
+    "rrp": 10530,
+    "image": "img/p/kevinmurphy-1.jpg",
+    "url": "https://authentica.love/catalog/volosy/nabor_nayt_shift_syvorotka_i_sprey_patchi_/",
+    "club": 7370,
+    "src": "https://authentica.love/upload/iblock/d25/ls92dcf3n6pnah49fq1okcdy0qam01y5.webp"
+   },
+   {
+    "title": "[ПЛАМ.НУАР] ароматический диффузор с палочками",
+    "subtitle": "",
+    "rrp": 6630,
+    "image": "img/p/kevinmurphy-2.jpg",
+    "url": "https://authentica.love/catalog/telo/ukhod_za_telom/aromaterapiya_sol_sprey_molochko/plam_nuar_aromaticheskiy_diffuzor_s_palochkami/",
+    "club": 4640,
+    "src": "https://authentica.love/upload/iblock/f5a/w6y8jl7hpa51gjtfmkks1qcyst06gw1c.webp"
+   },
+   {
+    "title": "Набор для максимального увлажнения волос",
+    "subtitle": "",
+    "rrp": 3840,
+    "image": "img/p/kevinmurphy-3.jpg",
+    "url": "https://authentica.love/catalog/volosy/nabory_dlya_ukhoda_za_volosami/nabor_dlya_maksimalnogo_uvlazhneniya_volos/",
+    "club": 2690,
+    "src": "https://authentica.love/upload/iblock/aac/89nrukc06x500b5mjoytjq5ex4qs9va4.webp"
+   },
+   {
+    "title": "[НАЙТ.ШИФТ] увлажняющая ночная сыворотка для волос",
+    "subtitle": "",
+    "rrp": 5780,
+    "image": "img/p/kevinmurphy-4.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/syvorotki_dlya_volos/nayt_shift_uvlazhnyayushchaya_nochnaya_syvorotka_dlya_volos/",
+    "club": 4050,
+    "src": "https://authentica.love/upload/iblock/70f/3226y19iduttan9fdsml1lpkho964z6u.webp"
+   },
+   {
+    "title": "Набор для укладки",
+    "subtitle": "",
+    "rrp": 11050,
+    "image": "img/p/kevinmurphy-5.jpg",
+    "url": "https://authentica.love/catalog/podarki/podarochnye_nabory/nabory_dlya_volos/nabor_dlya_ukladki/",
+    "club": 7730,
+    "src": "https://authentica.love/upload/iblock/d74/7ftnychx7uxofuvs8gksboww5qqtl6ud.webp"
+   },
+   {
+    "title": "Шампунь для тонких окрашенных волос ANGEL.WASH",
+    "subtitle": "",
+    "rrp": 4150,
+    "image": "img/p/kevinmurphy-6.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/shampuni/shampun-dlya-okrashennykh-volos-angel-wash-250/",
+    "club": 2900,
+    "src": "https://authentica.love/upload/iblock/9dd/sc7je198pc6f5whcvucwcmay7f2khsiw.webp"
+   },
+   {
+    "title": "Бальзам для тонких окрашенных волос ANGEL.RINSE",
+    "subtitle": "",
+    "rrp": 4150,
+    "image": "img/p/kevinmurphy-7.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/balzamy_i_losony_dlya_volos/konditsioner-dlya-tonkikh-okrashennykh-volos-angel-rinse-250/",
+    "club": 2900,
+    "src": "https://authentica.love/upload/iblock/be3/au5acybkhdjco8aymq717kclurnahhf4.webp"
+   },
+   {
+    "title": "Маска для тонких, окрашенных и поврежденных волос ANGEL.MASQUE",
+    "subtitle": "",
+    "rrp": 7030,
+    "image": "img/p/kevinmurphy-8.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/maski_dlya_volos/maska-dlya-tonkikh-okrashennykh-i-povrezhdennykh-volos-angel-masque-200/",
+    "club": 4920,
+    "src": "https://authentica.love/upload/iblock/863/q175dw85d6n4fkijpeueg4mhmrjdr0om.webp"
+   },
+   {
+    "title": "[АНГЕЛ] маска для интенсивного ухода за окрашенными волосами",
+    "subtitle": "",
+    "rrp": 1650,
+    "image": "img/p/kevinmurphy-9.jpg",
+    "url": "https://authentica.love/catalog/brands/kevin-murphy/angel_maska_dlya_intensivnogo_ukhoda_za_okrashennymi_volosami/",
+    "club": 1160,
+    "src": "https://authentica.love/upload/iblock/c8d/r5xvjda69qovaw62slkj1w01u465lt25.webp"
+   },
+   {
+    "title": "Кондиционер для тонких окрашенных волос ANGEL.RINSE",
+    "subtitle": "",
+    "rrp": 6630,
+    "image": "img/p/kevinmurphy-10.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/konditsioner_dlya_tonkikh_okrashennykh_volos_angel_rinse1/",
+    "club": 4640,
+    "src": "https://authentica.love/upload/iblock/934/erfumfepje7ivzpdq01fwoab5juy56ud.webp"
+   },
+   {
+    "title": "VA-VA-VOLUME/Набор: [АНГЕЛ] шампунь+[АНГЕЛ] бальзам+[АНТИ.ГРАВИТИ]",
+    "subtitle": "",
+    "rrp": 11050,
+    "image": "img/p/kevinmurphy-11.jpg",
+    "url": "https://authentica.love/catalog/volosy/nabory_dlya_ukhoda_za_volosami/va_va_volume_nabor_angel_shampun_angel_balzam_anti_graviti/",
+    "club": 7730,
+    "src": "https://authentica.love/upload/iblock/125/am6uk5tbst8czer1eamamt21c3by3mjj.webp"
+   },
+   {
+    "title": "Бальзам для защиты и стойкости цвета волос EVERLASTING.COLOUR RINSE",
+    "subtitle": "",
+    "rrp": 4370,
+    "image": "img/p/kevinmurphy-12.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/balzamy_i_losony_dlya_volos/balzam-dlya-zashchity-i-stoykosti-tsveta-volos_250/",
+    "club": 3060,
+    "src": "https://authentica.love/upload/iblock/d65/k4u89eijpmmt4f2k64lwhuzkj0n7vj6l.webp"
+   },
+   {
+    "title": "Шампунь для защиты и стойкости цвета волос EVERLASTING.COLOUR WASH",
+    "subtitle": "",
+    "rrp": 4370,
+    "image": "img/p/kevinmurphy-13.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/shampuni/shampun-dlya-zashchity-i-stoykosti-tsveta-volos_250/",
+    "club": 3060,
+    "src": "https://authentica.love/upload/iblock/4bd/1kvsyob7xqerpd02v5ro9fsob8mongf2.webp"
+   },
+   {
+    "title": "Несмываемый кондиционер-уход для защиты и стойкости цвета волос EVERLASTING.COLOUR LEAVE-IN",
+    "subtitle": "",
+    "rrp": 5160,
+    "image": "img/p/kevinmurphy-14.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/nesmyvaemyy_ukhod/nesmyvaemyy-konditsioner-ukhod-dlya-zashchity-i-stoykosti-tsveta-volos_150/",
+    "club": 3610,
+    "src": "https://authentica.love/upload/iblock/949/5f91o15go3wk5hsgdp00vnjhcct1e3g0.webp"
+   },
+   {
+    "title": "Кондиционер для вьющихся и кудрявых волос",
+    "subtitle": "",
+    "rrp": 4540,
+    "image": "img/p/kevinmurphy-15.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/konditsionery/balzam_dlya_vyushchikhsya_volos/",
+    "club": 3180,
+    "src": "https://authentica.love/upload/iblock/e31/4njd3bxmvcaprm7nveo64hnejiy6y6kw.webp"
+   },
+   {
+    "title": "Шампунь для вьющихся и кудрявых волос",
+    "subtitle": "",
+    "rrp": 4540,
+    "image": "img/p/kevinmurphy-16.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/shampuni/shampun_dlya_vyushchikhsya_volos/",
+    "club": 3180,
+    "src": "https://authentica.love/upload/iblock/5f9/63ni668rbbogt04bewbzjg9bu6sktw21.webp"
+   },
+   {
+    "title": "Дефинирующий крем для усиления завитка",
+    "subtitle": "",
+    "rrp": 5600,
+    "image": "img/p/kevinmurphy-17.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/stayling_kremy/definiruyushchiy_krem_dlya_usileniya_zavitka/",
+    "club": 3920,
+    "src": "https://authentica.love/upload/iblock/ab9/z0t0zr9ni1wzgnnszhp8qrktajq6dg1m.webp"
+   },
+   {
+    "title": "Стайлинг-уход для дефинирования локонов кудрявых и вьющихся волос KILLER.CURLS",
+    "subtitle": "",
+    "rrp": 5430,
+    "image": "img/p/kevinmurphy-18.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/mussy_dlya_volos/stayling-ukhod-dlya-definirovaniya-lokonov-killer-curls-200/",
+    "club": 3800,
+    "src": "https://authentica.love/upload/iblock/e37/hgcyp7h1uadpzlvu26xtmrd1avca6fgx.webp"
+   },
+   {
+    "title": "Текстурирующий спрей для усиления локонов и придания объема KILLER.WAVES",
+    "subtitle": "",
+    "rrp": 5020,
+    "image": "img/p/kevinmurphy-19.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/sprei_dlya_ukladki/teksturiruyushchiy-sprey-dlya-usileniya-lokonov-killer-waves-150/",
+    "club": 3510,
+    "src": "https://authentica.love/upload/iblock/a8a/v5sy20h7m6zjnjsnvgc83730r6u7arg5.webp"
+   },
+   {
+    "title": "Спрей для прикорневого объема ANTI.GRAVITY.SPRAY",
+    "subtitle": "",
+    "rrp": 4710,
+    "image": "img/p/kevinmurphy-20.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/sprei_dlya_ukladki/sprey-dlya-prikornevogo-obema-anti-gravity-150/",
+    "club": 3300,
+    "src": "https://authentica.love/upload/iblock/815/ndaxc5f378n5l6iz682z90bgdpxno8jy.webp"
+   },
+   {
+    "title": "Лосьон для прикорневого объема ANTI.GRAVITY",
+    "subtitle": "",
+    "rrp": 4710,
+    "image": "img/p/kevinmurphy-21.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/losony_dlya_volos/loson-dlya-prikornevogo-obema-anti-gravity-150/",
+    "club": 3300,
+    "src": "https://authentica.love/upload/iblock/3cc/5vlh1q4j3xi69iop8q18y933bfnvxaz3.webp"
+   },
+   {
+    "title": "Пудра для прикорневого объема POWDER.PUFF",
+    "subtitle": "",
+    "rrp": 5120,
+    "image": "img/p/kevinmurphy-22.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/losony_dlya_volos/pudra-dlya-prikornevogo-obema-powder-puff-14/",
+    "club": 3580,
+    "src": "https://authentica.love/upload/iblock/9f8/xfrrs1dgxjrzqovdlqnknz9qj734y3ab.webp"
+   },
+   {
+    "title": "Мусс для объема BODY.BUILDER",
+    "subtitle": "",
+    "rrp": 4750,
+    "image": "img/p/kevinmurphy-23.jpg",
+    "url": "https://authentica.love/catalog/volosy/stayling/mussy_dlya_volos/muss-dlya-obema-body-builder-400/",
+    "club": 3320,
+    "src": "https://authentica.love/upload/iblock/162/pea9zyv3x0hlqp17s001w7u7htbz4v9w.webp"
+   },
+   {
+    "title": "Бальзам для объема и уплотнения волос PLUMPING.RINSE",
+    "subtitle": "",
+    "rrp": 1250,
+    "image": "img/p/kevinmurphy-24.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/balzamy_i_losony_dlya_volos/konditsioner-dlya-uplotneniya--volos-plumping-rinse-40/",
+    "club": 880,
+    "src": "https://authentica.love/upload/iblock/c75/4k3ldu9un15bce0fyrci58k0t5vscr17.webp"
+   },
+   {
+    "title": "Спрей для уплотнения волос BODY.MASS",
+    "subtitle": "",
+    "rrp": 7330,
+    "image": "img/p/kevinmurphy-25.jpg",
+    "url": "https://authentica.love/catalog/volosy/ukhod_za_volosami/sprei_dlya_volos/nesmyvaemyy-uplotnyayushchiy-ukhod-body-mass-100ml/",
+    "club": 5130,
+    "src": "https://authentica.love/upload/iblock/fc9/7hqmy7b4qthmexun00v6ha7b5vqrjruo.webp"
+   }
+  ]
+ }
+]

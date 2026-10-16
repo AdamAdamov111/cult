@@ -1,5 +1,6 @@
 import raw from '../../data/catalog.json';
 import type { Product } from '../types';
+import { PARTNER_PRODUCTS, BRANDS } from './brands';
 
 interface RawProduct {
   id: string; slug: string; title: string; tagline: string; rrp: number; club: number;
@@ -21,12 +22,21 @@ function categorize(p: RawProduct): string {
 
 const HITS = new Set(['maska-filler', 'cream-absolute-youth', 'eye-cream-absolute-youth', 'first-transformation-antiage-cream']);
 
-export const PRODUCTS: Product[] = (raw.products as RawProduct[]).map((p) => ({
+const BYRAIN_PRODUCTS: Product[] = (raw.products as RawProduct[]).map((p) => ({
   ...p,
   brand: 'BYRAIN',
   cat: categorize(p),
   hit: HITS.has(p.slug),
 }));
+
+/** Весь каталог клуба: BYRAIN плюс бренды-партнёры. */
+export const PRODUCTS: Product[] = [...BYRAIN_PRODUCTS, ...PARTNER_PRODUCTS];
+
+BRANDS[0].count = BYRAIN_PRODUCTS.filter((p) => p.rrp > 0).length;
+
+export function byBrand(brandTitle: string): Product[] {
+  return PRODUCTS.filter((p) => p.brand === brandTitle && p.rrp > 0);
+}
 
 export const PRODUCT_MAP = new Map(PRODUCTS.map((p) => [p.id, p]));
 
@@ -47,8 +57,9 @@ export function searchProducts(q: string): Product[] {
   return PRODUCTS.filter((p) =>
     p.title.toLowerCase().includes(n) ||
     p.tagline.toLowerCase().includes(n) ||
+    p.brand.toLowerCase().includes(n) ||
     p.collections.some((c) => c.toLowerCase().includes(n)),
-  ).slice(0, 24);
+  ).slice(0, 40);
 }
 
 export const CATALOG_DATE: string = raw.scraped;

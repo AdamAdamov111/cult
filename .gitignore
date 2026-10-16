@@ -2,3 +2,7 @@ node_modules
 dist
 data/raw
 .DS_Store
+.env
+.env.*
+server/db.json
+worker/.wrangler

@@ -64,11 +64,13 @@ export interface Banner {
   tone: 'dark' | 'light';
   target: Target;
   sponsored?: boolean;
+  fit?: 'cover' | 'contain';   // товар показываем целиком, фото — кадрируем
 }
 
 export type Target =
   | { t: 'product'; id: string }
   | { t: 'offer'; id: string }
+  | { t: 'brand'; id: string }
   | { t: 'section'; id: SectionId }
   | { t: 'join' }
   | { t: 'external'; url: string };

@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { OfferCard, ProductCard, SectionBanner } from '../components/Cards';
 import { Chips, Empty, money } from '../components/Primitives';
+import { BrandRow } from '../components/BrandRow';
 import { IcSearch, IcX } from '../components/Icons';
 import { COSMETICS_CATS, SECTIONS } from '../data/sections';
 import { byCat, searchProducts } from '../data/products';
@@ -69,6 +70,10 @@ export function Catalog() {
 
           {mode === 'cosmetics' ? (
             <>
+              <div className="block--tight">
+                <div className="block-head" style={{ paddingBottom: 9 }}><h2 className="h2">Бренды клуба</h2></div>
+                <BrandRow />
+              </div>
               <div className="block--tight"><Chips items={COSMETICS_CATS} value={cat} onChange={setCat} /></div>
               <div className="block--tight">
                 <div className="grid2">{byCat(cat).map((p) => <ProductCard key={p.id} p={p} />)}</div>

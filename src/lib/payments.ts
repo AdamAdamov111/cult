@@ -44,4 +44,25 @@ export async function payOrder(payload: { lines: { id: string; qty: number }[]; 
   return openInvoice(link);
 }
 
+/** Состояние пользователя со стороны сервера — источник правды о членстве. */
+export interface MeState {
+  member: boolean;
+  until: number | null;
+  autoRenew: boolean;
+  orders: { id: string; total: number; ts: number; lines: unknown[] }[];
+}
+
+export async function fetchMe(): Promise<MeState | null> {
+  if (!API || !tg?.initData) return null;
+  try {
+    const r = await fetch(`${API}/me`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Init-Data': tg.initData },
+      body: '{}',
+    });
+    if (!r.ok) return null;
+    return (await r.json()) as MeState;
+  } catch { return null; }
+}
+
 export const DEMO_MODE = !API;

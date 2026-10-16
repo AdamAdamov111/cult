@@ -2,8 +2,9 @@ import type { Story } from '../types';
 import { PRODUCTS } from './products';
 
 const img = (slug: string, i = 0) => PRODUCTS.find((p) => p.slug === slug)?.images[i] || '';
+const pid = (slug: string) => PRODUCTS.find((p) => p.slug === slug)?.id || '';
 
-/** Сторис как у Золотого Яблока: кружок на сегмент, внутри — полноэкранные карточки. */
+/** Сторис по сегментам клуба — вход в каждое направление. */
 export const STORIES: Story[] = [
   {
     id: 'st-cosmetics', section: 'cosmetics', label: 'Косметика', cover: img('cream-absolute-youth'),
@@ -12,87 +13,99 @@ export const STORIES: Story[] = [
         image: img('cream-absolute-youth'), eyebrow: 'Клубная цена',
         title: 'Минус 50% на всю линию BYRAIN',
         text: 'Крем «Абсолютная Молодость» — 13 500 ₽ вместо 27 000 ₽. Одна покупка окупает членство в четыре раза.',
-        cta: 'Смотреть крем', target: { t: 'product', id: PRODUCTS.find((p) => p.slug === 'cream-absolute-youth')!.id },
+        cta: 'Смотреть крем', target: { t: 'product', id: pid('cream-absolute-youth') },
       },
       {
-        image: img('maska-filler'), eyebrow: 'Бестселлер',
-        title: 'Филлер-маска за 14 000 ₽',
-        text: 'Самый покупаемый продукт бренда. В клубе — ровно половина цены с полки.',
-        cta: 'В каталог', target: { t: 'section', id: 'cosmetics' },
+        image: 'img/brand-greymy.jpg', eyebrow: 'Новый бренд в клубе',
+        title: 'GREYMY — уход за волосами, −35%',
+        text: 'Профессиональная линия: маски, шампуни, несмываемый уход и стайлинг по клубным ценам.',
+        cta: 'Открыть бренд', target: { t: 'brand', id: 'greymy' },
       },
       {
-        image: img('finegold'), eyebrow: 'Ампульные концентраты',
-        title: 'Семь ампул, семь протоколов',
-        text: 'FINE GOLD, LIQUID PLATINUM, ETERNITY PEARL и другие — от 3 875 ₽ по клубной цене.',
-        cta: 'Выбрать ампулу', target: { t: 'section', id: 'cosmetics' },
-      },
-    ],
-  },
-  {
-    id: 'st-sport', section: 'sport', label: 'Спорт', cover: '',
-    slides: [
-      {
-        image: '', eyebrow: 'Спорт',
-        title: 'Годовой контракт −40%',
-        text: 'ENCORE FITNESS: все клубы сети, бассейн и SPA. Экономия до 68 000 ₽ за год.',
-        cta: 'Открыть предложение', target: { t: 'offer', id: 'sp-encore' },
-      },
-      {
-        image: '', eyebrow: 'Восстановление',
-        title: 'Криосауна и прессотерапия вдвое дешевле',
-        text: 'Шесть сессий в OXY LAB. Работает в связке с антивозрастным уходом.',
-        cta: 'Забрать', target: { t: 'offer', id: 'sp-recovery' },
+        image: 'img/brand-oribe.jpg', eyebrow: 'ORIBE и KEVIN MURPHY',
+        title: 'Салонные бренды −30%',
+        text: 'Культовые линии из authentica.love теперь доступны членам клуба по закрытым ценам.',
+        cta: 'Смотреть', target: { t: 'brand', id: 'oribe' },
       },
     ],
   },
   {
-    id: 'st-travel', section: 'travel', label: 'Travel', cover: '',
+    id: 'st-sport', section: 'sport', label: 'Спорт', cover: 'img/padel-court.jpg',
     slides: [
       {
-        image: '', eyebrow: 'Закрытый тариф',
+        image: 'img/padel-court.jpg', eyebrow: 'First Padel Club',
+        title: 'Абонемент на 10 игр, −30%',
+        text: 'Крупнейший крытый падел-центр в мире: 26 кортов, ракетки и мячи включены.',
+        cta: 'Открыть предложение', target: { t: 'offer', id: 'sp-padel-court' },
+      },
+      {
+        image: 'img/wc-club.jpg', eyebrow: 'World Class Романов',
+        title: 'Годовой контракт −35%',
+        text: 'Клуб у метро Арбатская: бассейн, SPA и групповые программы. Выгода до 115 000 ₽ за год.',
+        cta: 'Забрать', target: { t: 'offer', id: 'sp-wc-year' },
+      },
+    ],
+  },
+  {
+    id: 'st-travel', section: 'travel', label: 'Travel', cover: 'img/tt-beach.jpg',
+    slides: [
+      {
+        image: 'img/tt-beach.jpg', eyebrow: 'Travel Times · закрытый тариф',
         title: 'Мальдивы, вилла на воде, −32%',
         text: 'Семь ночей над лагуной, полупансион и гидросамолёт. Только по заявке члена клуба.',
         cta: 'Оставить заявку', target: { t: 'offer', id: 'tr-maldives' },
       },
       {
-        image: '', eyebrow: 'Швейцария',
-        title: 'Лонжевити-ретрит на родине BYRAIN',
-        text: 'Пять дней в клинике долголетия на Женевском озере. Для клуба — минус 25%.',
-        cta: 'Подробности', target: { t: 'offer', id: 'tr-swiss' },
+        image: 'img/tt-aurora.jpg', eyebrow: 'Норвегия',
+        title: 'Северное сияние, −25%',
+        text: 'Тромсё и фьорды: стеклянный лодж, выезды с гидом-фотографом, китовое сафари.',
+        cta: 'Подробности', target: { t: 'offer', id: 'tr-aurora' },
+      },
+      {
+        image: 'img/sen-lake.jpg', eyebrow: 'Подмосковье',
+        title: 'Уикенд в Seneshal, −35%',
+        text: 'Дизайнерский спа-отель на берегу озера в часе езды от Москвы.',
+        cta: 'Смотреть', target: { t: 'offer', id: 'tr-seneshal' },
       },
     ],
   },
   {
-    id: 'st-beauty', section: 'beauty', label: 'Красота', cover: '',
+    id: 'st-beauty', section: 'beauty', label: 'Красота', cover: 'img/omny-face.jpg',
     slides: [
       {
-        image: '', eyebrow: 'Красота',
-        title: 'Уход на косметике BYRAIN −45%',
-        text: 'MONO ATELIER: авторский 90-минутный протокол на пептидной линии бренда.',
-        cta: 'Записаться', target: { t: 'offer', id: 'bt-mono' },
+        image: 'img/omny-face.jpg', eyebrow: 'Omny Beauty',
+        title: 'SMAS-лифтинг Ultraformer, −45%',
+        text: 'Безоперационный лифтинг на глубине SMAS. Эффект держится до двух лет.',
+        cta: 'Записаться', target: { t: 'offer', id: 'bt-omny-smas' },
       },
       {
-        image: '', eyebrow: 'Аппаратная косметология',
-        title: 'Fotona 4D курсом, −40%',
-        text: 'Лифтинг без инъекций: три процедуры и домашний уход BYRAIN в подарок.',
-        cta: 'Смотреть', target: { t: 'offer', id: 'bt-laser' },
+        image: 'img/omny-proc.jpg', eyebrow: 'Аппаратная косметология',
+        title: 'Morpheus8 курсом, −35%',
+        text: 'Три процедуры микроигольчатого RF-лифтинга лица и шеи с постуходом.',
+        cta: 'Смотреть', target: { t: 'offer', id: 'bt-omny-morpheus' },
       },
     ],
   },
   {
-    id: 'st-health', section: 'health', label: 'Здоровье', cover: '',
+    id: 'st-health', section: 'health', label: 'Здоровье', cover: 'img/jar-parilka.jpg',
     slides: [
       {
-        image: '', eyebrow: 'Здоровье',
-        title: 'Чекап «Долголетие» за половину цены',
-        text: 'Более 80 показателей, биологический возраст и протокол от врача. ATLAS CLINIC, −45%.',
-        cta: 'Получить', target: { t: 'offer', id: 'hl-checkup' },
+        image: 'img/mayr-building.jpg', eyebrow: 'MAYRVEDA 5★ · Кисловодск',
+        title: 'Детокс по Майеру, −25%',
+        text: 'Семь дней врачебной программы в санатории из списка Healing Hotels of the World.',
+        cta: 'Оставить заявку', target: { t: 'offer', id: 'hl-mayr-detox' },
       },
       {
-        image: '', eyebrow: 'Диагностика',
-        title: 'МРТ всего тела, 3 Тесла',
-        text: 'Онкоскрининг за одно посещение со скидкой 38% и вторым мнением радиолога.',
-        cta: 'Открыть', target: { t: 'offer', id: 'hl-mri' },
+        image: 'img/jar-parilka.jpg', eyebrow: 'Жар-Птица',
+        title: 'Индивидуальное парение, −50%',
+        text: 'Авторское парение с банным мастером: 90 минут, купели и травяной чай.',
+        cta: 'Получить', target: { t: 'offer', id: 'hl-jar-parenie' },
+      },
+      {
+        image: 'img/medsi-doctor.jpg', eyebrow: 'МЕДСИ',
+        title: 'Чекап «Премиум» за день, −30%',
+        text: 'Полное обследование за одно посещение и заключение терапевта.',
+        cta: 'Открыть', target: { t: 'offer', id: 'hl-medsi-checkup' },
       },
     ],
   },

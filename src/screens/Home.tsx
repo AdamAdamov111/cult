@@ -2,14 +2,14 @@ import { useState } from 'react';
 import { BannerCarousel } from '../components/BannerCarousel';
 import { StoriesRow, StoriesViewer } from '../components/Stories';
 import { OfferCard, ProductCard, SectionBanner } from '../components/Cards';
+import { BrandRow } from '../components/BrandRow';
 import { BlockHead, money } from '../components/Primitives';
 import { IcCrown, IcRight, IcSpark } from '../components/Icons';
 import { SECTIONS } from '../data/sections';
 import { COMING, HIT_PRODUCTS, ON_SALE } from '../data/products';
 import { OFFERS, TOTAL_OFFER_VALUE } from '../data/offers';
 import { useApp } from '../store';
-import { useNav } from '../router';
-import type { Target } from '../types';
+import { goTarget, useNav } from '../router';
 
 export function Home() {
   const [story, setStory] = useState<number | null>(null);
@@ -18,15 +18,12 @@ export function Home() {
   const go = useNav((s) => s.go);
   const setTab = useNav((s) => s.setTab);
 
-  const onGo = (t: Target) => {
-    if (t.t === 'external') { window.open(t.url, '_blank'); return; }
-    if (t.t === 'join') { go({ k: 'join' }); return; }
-    if (t.t === 'product') { go({ k: 'product', id: t.id }); return; }
-    if (t.t === 'offer') { go({ k: 'offer', id: t.id }); return; }
-    go({ k: 'section', id: t.id });
-  };
+  const onGo = goTarget;
 
-  const topOffers = OFFERS.filter((o) => ['sp-encore', 'tr-maldives', 'hl-checkup', 'bt-mono'].includes(o.id));
+  // по одному сильному предложению из каждой сферы
+  const topOffers = ['tr-maldives', 'sp-wc-year', 'bt-omny-smas', 'hl-mayr-detox', 'hl-jar-parenie', 'sp-padel-court']
+    .map((id) => OFFERS.find((o) => o.id === id)!)
+    .filter(Boolean);
 
   return (
     <div className="screen screen--root">
@@ -107,7 +104,13 @@ export function Home() {
         </div>
       </div>
 
-      {/* 7. Выкладка косметики BYRAIN */}
+      {/* 7. Бренды клуба */}
+      <div className="block">
+        <BlockHead title="Бренды клуба" link="Все бренды" onLink={() => go({ k: 'section', id: 'cosmetics' })} />
+        <BrandRow />
+      </div>
+
+      {/* 8. Выкладка косметики BYRAIN */}
       <div className="block">
         <BlockHead title="Косметика BYRAIN" link="Все товары" onLink={() => go({ k: 'section', id: 'cosmetics' })} />
         <div className="grid2">

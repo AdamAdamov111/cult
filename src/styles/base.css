@@ -252,11 +252,12 @@ html[data-theme="dark"] .pcard__img { mix-blend-mode: lighten; }
   position: absolute; right: 0; top: 0; height: 100%; width: 52%;
   object-fit: contain; object-position: right center;
 }
+.cbanner__img--cover { inset: 0; width: 100%; object-fit: cover; object-position: center; }
 .cbanner__scrim { position: absolute; inset: 0; }
 .cbanner__content {
   position: absolute; inset: 0; padding: 16px; color: #fff; text-align: left;
   display: flex; flex-direction: column; align-items: flex-start;
-  justify-content: flex-end; gap: 5px; max-width: 72%;
+  justify-content: flex-end; gap: 5px; max-width: 78%;
 }
 .cbanner__eyebrow {
   font-size: 9px; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
@@ -636,4 +637,43 @@ html[data-theme="dark"] .citem__img { mix-blend-mode: lighten; }
   display: inline-flex; align-items: center; height: 17px; padding: 0 5px; border-radius: 3px;
   background: var(--surface-3); color: var(--faint); font-size: 9px; font-weight: 600;
   letter-spacing: .08em; text-transform: uppercase;
+}
+
+/* ========== BRAND ROW ========== */
+.brand-pill {
+  flex: 0 0 auto; display: flex; flex-direction: column; justify-content: space-between;
+  width: 112px; height: 62px; padding: 10px 11px; border-radius: var(--r-sm);
+  border: 1px solid var(--line); background: var(--surface); text-align: left;
+  transition: transform .12s var(--ease), border-color .15s;
+}
+.brand-pill:active { transform: scale(.96); }
+.brand-pill--on { border-color: var(--ink); background: var(--surface-2); }
+.brand-pill__name {
+  font-size: 11.5px; font-weight: 700; letter-spacing: .055em; text-transform: uppercase;
+  line-height: 1.1; color: var(--ink);
+}
+.brand-pill__off {
+  font-size: 10px; font-weight: 700; color: var(--gold-ink);
+  font-variant-numeric: tabular-nums;
+}
+.brand-pill__count { font-size: 9.5px; color: var(--faint); }
+
+.brand-hero {
+  position: relative; padding: 26px var(--pad) 22px; color: #fff; overflow: hidden;
+  background: linear-gradient(140deg, #0a0a0a 0%, #272320 100%);
+}
+.brand-hero__glow {
+  position: absolute; width: 260px; height: 260px; border-radius: 50%; right: -80px; top: -110px;
+  background: radial-gradient(circle, rgba(198,166,100,.32), transparent 70%);
+}
+.brand-hero__name {
+  position: relative; font-size: 26px; font-weight: 700; letter-spacing: .16em;
+  text-transform: uppercase; line-height: 1;
+}
+.brand-hero__meta { position: relative; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--gold); margin-top: 10px; }
+.brand-hero__about { position: relative; font-size: 13px; opacity: .85; line-height: 1.45; margin-top: 13px; }
+.brand-hero__badge {
+  position: relative; display: inline-flex; align-items: center; height: 29px; padding: 0 13px;
+  border-radius: var(--r-pill); background: #fff; color: #0a0a0a;
+  font-size: 12px; font-weight: 700; margin-top: 15px;
 }

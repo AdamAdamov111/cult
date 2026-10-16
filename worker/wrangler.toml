@@ -1,0 +1,16 @@
+name = "cult-api"
+main = "index.js"
+compatibility_date = "2026-01-01"
+
+# Создать один раз:  npx wrangler kv namespace create CULT
+# и подставить выданный id ниже.
+[[kv_namespaces]]
+binding = "CULT"
+id = "ЗАПОЛНИТЬ"
+
+[vars]
+PUBLIC_URL = "https://adamadamov111.github.io/cult/"
+
+# Секреты кладутся отдельно, в репозиторий не попадают:
+#   npx wrangler secret put BOT_TOKEN
+#   npx wrangler secret put PROVIDER_TOKEN

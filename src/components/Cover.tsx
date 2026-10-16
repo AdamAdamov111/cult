@@ -9,7 +9,13 @@ export function Cover({
   section, src, label, big, className,
 }: { section: SectionId; src?: string; label?: string; big?: boolean; className?: string }) {
   const s = SECTION_MAP[section];
-  if (src) return <img src={src} alt="" className={className} loading="lazy" decoding="async" />;
+  if (src) {
+    return (
+      <img src={src} alt="" loading="lazy" decoding="async"
+           className={className}
+           style={className ? undefined : { position: 'absolute', inset: 0, width: '100%', height: '100%', objectFit: 'cover' }} />
+    );
+  }
 
   const mono = (label || s.title).replace(/[^A-Za-zА-Яа-я0-9 ]/g, '').trim().split(/\s+/)
     .slice(0, 2).map((w) => w[0]).join('').toUpperCase();

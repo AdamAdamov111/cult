@@ -5,7 +5,8 @@ import { Cover } from './Cover';
 import type { Target } from '../types';
 
 const SECTION_OF: Record<string, any> = {
-  'bn-maldives': 'travel', 'bn-checkup': 'health', 'bn-join': 'cosmetics', 'bn-mask': 'cosmetics',
+  'bn-maldives': 'travel', 'bn-mayrveda': 'health', 'bn-padel': 'sport',
+  'bn-omny': 'beauty', 'bn-join': 'cosmetics', 'bn-mask': 'cosmetics', 'bn-brands': 'cosmetics',
 };
 
 export function BannerCarousel({ onGo }: { onGo: (t: Target) => void }) {
@@ -48,14 +49,15 @@ export function BannerCarousel({ onGo }: { onGo: (t: Target) => void }) {
         {banners.map((b) => (
           <div className="carousel__slide" key={b.id}>
             <button className="cbanner" onClick={() => onGo(b.target)}
-                    style={b.image ? { background: 'linear-gradient(118deg, #0a0a0a 0%, #26211b 100%)' } : undefined}>
+                    style={b.fit === 'contain' ? { background: 'linear-gradient(118deg, #0a0a0a 0%, #26211b 100%)' } : undefined}>
               {b.image
-                ? <img className="cbanner__img" src={b.image} alt="" loading="lazy" decoding="async" />
-                : <Cover section={SECTION_OF[b.id] || "cosmetics"} big />}
+                ? <img className={b.fit === 'contain' ? 'cbanner__img' : 'cbanner__img cbanner__img--cover'}
+                       src={b.image} alt="" loading="lazy" decoding="async" />
+                : <Cover section={SECTION_OF[b.id] || 'cosmetics'} big />}
               <div className="cbanner__scrim" style={{
-                background: b.image
+                background: b.fit === 'contain'
                   ? 'linear-gradient(90deg, #0a0a0a 0%, rgba(10,10,10,.88) 44%, rgba(10,10,10,0) 86%)'
-                  : 'linear-gradient(0deg, rgba(8,8,8,.74), rgba(8,8,8,.12))',
+                  : 'linear-gradient(0deg, rgba(8,8,8,.86) 2%, rgba(8,8,8,.42) 52%, rgba(8,8,8,.12) 100%)',
               }} />
               {b.sponsored && <span className="cbanner__ad">Партнёр</span>}
               <div className="cbanner__content">
