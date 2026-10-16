@@ -80,11 +80,7 @@ export function Home() {
       <div className="block">
         <BlockHead title="Пять сфер клуба" />
         <div className="pad col" style={{ gap: 10 }}>
-          {SECTIONS.map((s, i) => (
-            <div key={s.id} style={i === 0 ? { aspectRatio: '328/196' } : undefined}>
-              <SectionBanner s={s} />
-            </div>
-          ))}
+          {SECTIONS.map((s) => <SectionBanner key={s.id} s={s} />)}
         </div>
         <div className="pad" style={{ marginTop: 12 }}>
           <div className="note">

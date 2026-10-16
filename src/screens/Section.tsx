@@ -28,9 +28,9 @@ export function Section({ id }: { id: SectionId }) {
   return (
     <div className="screen">
       {/* Шапка раздела */}
-      <div style={{ position: 'relative', aspectRatio: '328/150', margin: '0 0 2px' }}>
+      <div style={{ position: 'relative', aspectRatio: '328/168', margin: '0 0 2px' }}>
         <Cover section={id} src={s.image} label={s.title} big />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(8,8,8,.78) 6%, rgba(8,8,8,.1) 80%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(8,8,8,.88) 4%, rgba(8,8,8,.48) 46%, rgba(8,8,8,.08) 84%)' }} />
         <div style={{ position: 'absolute', inset: 0, padding: 'var(--pad)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', color: '#fff' }}>
           <span className="sbanner__kicker">{s.kicker}</span>
           <span style={{ fontSize: 28, fontWeight: 700, letterSpacing: '.02em', lineHeight: 1 }}>{s.title}</span>

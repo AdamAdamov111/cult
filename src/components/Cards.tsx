@@ -86,7 +86,7 @@ export function SectionBanner({ s, count }: { s: SectionDef; count?: string }) {
   return (
     <button className="sbanner" onClick={() => go({ k: 'section', id: s.id })}>
       <Cover section={s.id} src={s.image} label={s.title} big className="sbanner__img" />
-      <div className="sbanner__scrim" style={{ background: 'linear-gradient(0deg, rgba(8,8,8,.74) 6%, rgba(8,8,8,.08) 76%)' }} />
+      <div className="sbanner__scrim" style={{ background: 'linear-gradient(0deg, rgba(8,8,8,.86) 4%, rgba(8,8,8,.46) 44%, rgba(8,8,8,.06) 82%)' }} />
       <div className="sbanner__content">
         <span className="sbanner__kicker">{s.kicker}</span>
         <span className="sbanner__title">{s.title}</span>
