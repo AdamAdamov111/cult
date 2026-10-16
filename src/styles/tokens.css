@@ -1,0 +1,78 @@
+/* CULT — дизайн-токены. База монохром по брендбуку BYRAIN + клубное золото. */
+:root {
+  color-scheme: light;
+
+  --bg:         #ffffff;
+  --bg-sunken:  #f6f5f3;
+  --surface:    #ffffff;
+  --surface-2:  #fafafa;
+  --surface-3:  #f1f0ee;
+
+  --ink:        #0a0a0a;
+  --ink-2:      #2c2c2c;
+  --muted:      #6d6d6d;
+  --faint:      #9b9b9b;
+
+  --line:       #e7e7e7;
+  --line-soft:  #f0efed;
+
+  --gold:       #c6a664;
+  --gold-ink:   #8c6e32;
+  --gold-wash:  #faf6ec;
+  --sale:       #e8503a;
+  --ok:         #2e7d5b;
+
+  --on-ink:     #ffffff;
+  --scrim:      rgba(10, 10, 10, .52);
+  --blur-bg:    rgba(255, 255, 255, .82);
+
+  --r-xs: 6px;
+  --r-sm: 10px;
+  --r:    14px;
+  --r-lg: 20px;
+  --r-pill: 999px;
+
+  --sh-1: 0 1px 2px rgba(10,10,10,.05);
+  --sh-2: 0 4px 16px rgba(10,10,10,.08);
+  --sh-3: 0 -8px 32px rgba(10,10,10,.12);
+
+  --pad: 16px;
+  --tabbar-h: 58px;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+  --ease-spring: cubic-bezier(.34, 1.3, .64, 1);
+
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg:         #0d0d0d;
+  --bg-sunken:  #000000;
+  --surface:    #161616;
+  --surface-2:  #1c1c1c;
+  --surface-3:  #232323;
+
+  --ink:        #f4f3f1;
+  --ink-2:      #d8d6d2;
+  --muted:      #9a9a9a;
+  --faint:      #6e6e6e;
+
+  --line:       #272727;
+  --line-soft:  #1f1f1f;
+
+  --gold:       #d4b678;
+  --gold-ink:   #d4b678;
+  --gold-wash:  #1d1a13;
+  --sale:       #ff6a52;
+  --ok:         #4bbd8b;
+
+  --on-ink:     #0a0a0a;
+  --scrim:      rgba(0, 0, 0, .66);
+  --blur-bg:    rgba(13, 13, 13, .82);
+
+  --sh-1: 0 1px 2px rgba(0,0,0,.4);
+  --sh-2: 0 4px 16px rgba(0,0,0,.5);
+  --sh-3: 0 -8px 32px rgba(0,0,0,.6);
+}
