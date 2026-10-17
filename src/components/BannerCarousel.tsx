@@ -3,6 +3,7 @@ import { BANNERS } from '../data/banners';
 import { useApp } from '../store';
 import { Cover } from './Cover';
 import type { Target } from '../types';
+import { asset } from '../lib/assets';
 
 const SECTION_OF: Record<string, any> = {
   'bn-maldives': 'travel', 'bn-mayrveda': 'health', 'bn-padel': 'sport',
@@ -52,7 +53,7 @@ export function BannerCarousel({ onGo }: { onGo: (t: Target) => void }) {
                     style={b.fit === 'contain' ? { background: 'linear-gradient(118deg, #0a0a0a 0%, #26211b 100%)' } : undefined}>
               {b.image
                 ? <img className={b.fit === 'contain' ? 'cbanner__img' : 'cbanner__img cbanner__img--cover'}
-                       src={b.image} alt="" loading="lazy" decoding="async" />
+                       src={asset(b.image)} alt="" loading="lazy" decoding="async" />
                 : <Cover section={SECTION_OF[b.id] || 'cosmetics'} big />}
               <div className="cbanner__scrim" style={{
                 background: b.fit === 'contain'

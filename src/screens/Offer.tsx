@@ -8,6 +8,7 @@ import { SECTION_MAP } from '../data/sections';
 import { useApp } from '../store';
 import { useNav } from '../router';
 import { haptic, setMainButton } from '../lib/telegram';
+import { asset } from '../lib/assets';
 
 export function Offer({ id }: { id: string }) {
   const o = OFFER_MAP.get(id)!;
@@ -42,7 +43,7 @@ export function Offer({ id }: { id: string }) {
   return (
     <div className="screen">
       <div style={{ position: 'relative', aspectRatio: '16/10' }}>
-        <Cover section={o.section} src={o.image || undefined} label={o.brand} big />
+        <Cover section={o.section} src={asset(o.image) || undefined} label={o.brand} big />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(8,8,8,.8) 4%, rgba(8,8,8,.08) 72%)' }} />
         <div style={{ position: 'absolute', inset: 0, padding: 'var(--pad)', color: '#fff', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
           <span className="sbanner__kicker" style={{ color: 'var(--gold)' }}>{s.title} · {o.brand}</span>

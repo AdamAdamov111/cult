@@ -5,6 +5,7 @@ import { useApp } from '../store';
 import { useNav } from '../router';
 import { SECTION_MAP, type SectionDef } from '../data/sections';
 import type { Offer, Product } from '../types';
+import { asset } from '../lib/assets';
 
 /* ======================= Карточка товара ======================= */
 export function ProductCard({ p }: { p: Product }) {
@@ -20,7 +21,7 @@ export function ProductCard({ p }: { p: Product }) {
   return (
     <div className="pcard">
       <div className="pcard__media" onClick={() => go({ k: 'product', id: p.id })}>
-        {p.images[0] && <img className="pcard__img" src={p.images[0]} alt={p.title} loading="lazy" decoding="async" />}
+        {p.images[0] && <img className="pcard__img" src={asset(p.images[0])} alt={p.title} loading="lazy" decoding="async" />}
         <div className="pcard__marks">
           {p.hit && <span className="badge-off" style={{ background: 'var(--ink)' }}>ХИТ</span>}
           {soon && <span className="badge-soon">скоро</span>}
@@ -64,7 +65,7 @@ export function OfferCard({ o }: { o: Offer }) {
   return (
     <button className="ocard" onClick={() => go({ k: 'offer', id: o.id })}>
       <div className="ocard__media">
-        <Cover section={o.section} src={o.image || undefined} label={o.brand} className="ocard__img" />
+        <Cover section={o.section} src={asset(o.image) || undefined} label={o.brand} className="ocard__img" />
         <span className="ocard__off">{o.deal}</span>
         {!member && <span className="ocard__lock"><IcLock size={13} /></span>}
       </div>
@@ -85,7 +86,7 @@ export function SectionBanner({ s, count }: { s: SectionDef; count?: string }) {
   const go = useNav((n) => n.go);
   return (
     <button className="sbanner" style={{ aspectRatio: s.ratio }} onClick={() => go({ k: 'section', id: s.id })}>
-      <Cover section={s.id} src={s.image} label={s.title} big className="sbanner__img" />
+      <Cover section={s.id} src={asset(s.image)} label={s.title} big className="sbanner__img" />
       <div className="sbanner__scrim" style={{ background: 'linear-gradient(0deg, rgba(8,8,8,.86) 4%, rgba(8,8,8,.46) 44%, rgba(8,8,8,.06) 82%)' }} />
       <div className="sbanner__content">
         <span className="sbanner__kicker">{s.kicker}</span>

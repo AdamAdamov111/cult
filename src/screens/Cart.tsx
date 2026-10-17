@@ -8,6 +8,7 @@ import { useNav } from '../router';
 import { haptic, setMainButton } from '../lib/telegram';
 import { DEMO_MODE, payOrder } from '../lib/payments';
 import type { Order } from '../types';
+import { asset } from '../lib/assets';
 
 const DELIVERY = [
   { id: 'courier', title: 'Курьером по Москве', sub: 'на следующий день', price: 400 },
@@ -129,7 +130,7 @@ export function Cart() {
             return (
               <div className="citem" key={l.id}>
                 <div className="citem__media" onClick={() => go({ k: 'product', id: p.id })}>
-                  {p.images[0] && <img className="citem__img" src={p.images[0]} alt="" loading="lazy" />}
+                  {p.images[0] && <img className="citem__img" src={asset(p.images[0])} alt="" loading="lazy" />}
                 </div>
                 <div style={{ flex: 1, minWidth: 0 }}>
                   <div className="row" style={{ alignItems: 'flex-start' }}>

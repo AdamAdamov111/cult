@@ -5,6 +5,7 @@ import { haptic } from '../lib/telegram';
 import { Cover } from './Cover';
 import { IcRight, IcX } from './Icons';
 import type { Target } from '../types';
+import { asset } from '../lib/assets';
 
 const SLIDE_MS = 5200;
 
@@ -20,7 +21,7 @@ export function StoriesRow({ onOpen }: { onOpen: (i: number) => void }) {
             <span className={`story-bubble__ring${isNew ? ' story-bubble__ring--new' : ''}`}>
               <span className="story-bubble__inner">
                 {st.cover
-                  ? <img className="story-bubble__img" src={st.cover} alt="" loading="lazy" />
+                  ? <img className="story-bubble__img" src={asset(st.cover)} alt="" loading="lazy" />
                   : <span style={{ position: 'relative', display: 'block', width: '100%', height: '100%' }}>
                       <Cover section={st.section} label={st.label} />
                     </span>}
@@ -84,7 +85,7 @@ export function StoriesViewer({
 
       <div className="viewer__media">
         {slide.image
-          ? <img className="viewer__img" src={slide.image} alt="" />
+          ? <img className="viewer__img" src={asset(slide.image)} alt="" />
           : <Cover section={story.section} label={story.label} big />}
         <div className="viewer__grad-top" />
         <div className="viewer__grad-bot" />

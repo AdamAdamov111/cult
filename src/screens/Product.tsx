@@ -6,6 +6,7 @@ import { PRODUCT_MAP, ON_SALE } from '../data/products';
 import { useApp } from '../store';
 import { useNav } from '../router';
 import { haptic, openExternal, setMainButton } from '../lib/telegram';
+import { asset } from '../lib/assets';
 
 export function Product({ id }: { id: string }) {
   const p = PRODUCT_MAP.get(id)!;
@@ -48,7 +49,7 @@ export function Product({ id }: { id: string }) {
         <div className="carousel__track" ref={gallery} style={{ padding: 0, gap: 0 }}>
           {(p.images.length ? p.images : ['']).map((src, i) => (
             <div key={i} style={{ flex: '0 0 100%', scrollSnapAlign: 'center', aspectRatio: 1, background: 'var(--surface-2)' }}>
-              {src && <img src={src} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />}
+              {src && <img src={asset(src)} alt={p.title} style={{ width: '100%', height: '100%', objectFit: 'contain' }} />}
             </div>
           ))}
         </div>
