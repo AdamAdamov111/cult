@@ -84,7 +84,7 @@ export function OfferCard({ o }: { o: Offer }) {
 export function SectionBanner({ s, count }: { s: SectionDef; count?: string }) {
   const go = useNav((n) => n.go);
   return (
-    <button className="sbanner" onClick={() => go({ k: 'section', id: s.id })}>
+    <button className="sbanner" style={{ aspectRatio: s.ratio }} onClick={() => go({ k: 'section', id: s.id })}>
       <Cover section={s.id} src={s.image} label={s.title} big className="sbanner__img" />
       <div className="sbanner__scrim" style={{ background: 'linear-gradient(0deg, rgba(8,8,8,.86) 4%, rgba(8,8,8,.46) 44%, rgba(8,8,8,.06) 82%)' }} />
       <div className="sbanner__content">

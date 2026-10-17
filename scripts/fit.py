@@ -69,3 +69,18 @@ def compose(src, dst, w=1312, h=672, side='right', pad=0.0, quality=88, shade=0.
     print(f'{dst.name:<22} {w}×{h}  {dst.stat().st_size // 1024:>4} KB  '
           f'снимок целиком {iw}×{ih}, фон достроен')
     return dst
+
+
+def whole(src, dst, max_w=1600, quality=88):
+    """Кадр целиком: ничего не обрезается и не размывается, только масштаб."""
+    from PIL import Image
+    im = Image.open(src).convert('RGB')
+    w, h = im.size
+    if w > max_w:
+        im = im.resize((max_w, round(h * max_w / w)), Image.LANCZOS)
+    dst = pathlib.Path(dst)
+    dst.parent.mkdir(parents=True, exist_ok=True)
+    im.save(dst, 'JPEG', quality=quality, optimize=True, progressive=True)
+    print(f'{dst.name:<26} {im.size[0]}×{im.size[1]}  соотношение {im.size[0]}/{im.size[1]} '
+          f'({im.size[0]/im.size[1]:.2f})  {dst.stat().st_size // 1024} KB')
+    return im.size

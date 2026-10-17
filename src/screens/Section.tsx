@@ -28,7 +28,7 @@ export function Section({ id }: { id: SectionId }) {
   return (
     <div className="screen">
       {/* Шапка раздела */}
-      <div style={{ position: 'relative', aspectRatio: '328/168', margin: '0 0 2px' }}>
+      <div style={{ position: 'relative', aspectRatio: s.ratio, margin: '0 0 2px' }}>
         <Cover section={id} src={s.image} label={s.title} big />
         <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(0deg, rgba(8,8,8,.88) 4%, rgba(8,8,8,.48) 46%, rgba(8,8,8,.08) 84%)' }} />
         <div style={{ position: 'absolute', inset: 0, padding: 'var(--pad)', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end', color: '#fff' }}>
