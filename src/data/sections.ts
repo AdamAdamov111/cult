@@ -15,6 +15,7 @@ export const SECTIONS: SectionDef[] = [
   { id: 'sport',     title: 'СПОРТ',     kicker: 'First Padel · World Class', sub: 'Корты, контракты, тренировки', image: 'img/sec-sport.jpg',     from: '#0e1418', to: '#27343a' },
   { id: 'travel',    title: 'TRAVEL',    kicker: 'Travel Times · Seneshal',   sub: 'Авторские туры и отели',      image: 'img/sec-travel.jpg',    from: '#0a1520', to: '#1c3b4a' },
   { id: 'beauty',    title: 'КРАСОТА',   kicker: 'Omny Beauty Clinic',        sub: 'Косметология и процедуры',     image: 'img/sec-beauty.jpg',    from: '#1a0f14', to: '#3e2630' },
+  { id: 'clubs',     title: 'КЛУБЫ',     kicker: 'А-Клуб · Атланты · Club 500', sub: 'Кросс-членство и доступ',      image: 'img/sec-clubs.jpg',     from: '#0a0a0a', to: '#2a2420' },
   { id: 'health',    title: 'ЗДОРОВЬЕ',  kicker: 'MAYRVEDA · МЕДСИ · Жар-Птица', sub: 'Чекапы, ретриты, баня',    image: 'img/sec-health.jpg',    from: '#0a1512', to: '#1d342c' },
 ];
 

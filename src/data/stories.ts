@@ -87,6 +87,23 @@ export const STORIES: Story[] = [
     ],
   },
   {
+    id: 'st-clubs', section: 'clubs', label: 'Клубы', cover: 'img/st-clubs.jpg',
+    slides: [
+      {
+        image: 'img/sec-clubs.jpg', eyebrow: 'Кросс-членство',
+        title: 'Двери других закрытых клубов',
+        text: 'А-Клуб, Атланты, Club 500, Эквиум. Членство в CULT открывает гостевой вход и условия на первый год.',
+        cta: 'Смотреть клубы', target: { t: 'section', id: 'clubs' },
+      },
+      {
+        image: 'img/sec-clubs.jpg', eyebrow: 'А-Клуб · Шереметьево',
+        title: 'Лаундж, куда не пускают с улицы',
+        text: '54 места, рубиновый бар, тихая роскошь в терминале B. Для членов CULT — гостевой визит по заявке.',
+        cta: 'Оставить заявку', target: { t: 'offer', id: 'cl-aclub-lounge' },
+      },
+    ],
+  },
+  {
     id: 'st-health', section: 'health', label: 'Здоровье', cover: 'img/st-health.jpg',
     slides: [
       {

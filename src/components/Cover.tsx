@@ -17,8 +17,12 @@ export function Cover({
     );
   }
 
-  const mono = (label || s.title).replace(/[^A-Za-zА-Яа-я0-9 ]/g, '').trim().split(/\s+/)
-    .slice(0, 2).map((w) => w[0]).join('').toUpperCase();
+  // из двух слов берём по первой букве, из одного — две первые
+  const words = (label || s.title).replace(/[^A-Za-zА-Яа-я0-9 ]/g, ' ').trim().split(/\s+/).filter(Boolean);
+  const mono = (words.length > 1
+    ? words.slice(0, 2).map((w) => w[0]).join('')
+    : (words[0] || '').slice(0, 2)
+  ).toUpperCase();
 
   return (
     <div className={className} style={{

@@ -21,7 +21,7 @@ export function Home() {
   const onGo = goTarget;
 
   // по одному сильному предложению из каждой сферы
-  const topOffers = ['tr-maldives', 'sp-wc-year', 'bt-omny-smas', 'hl-mayr-detox', 'hl-jar-parenie', 'sp-padel-court']
+  const topOffers = ['cl-aclub-lounge', 'tr-maldives', 'sp-wc-year', 'bt-omny-smas', 'hl-mayr-detox', 'cl-atlanty', 'sp-padel-court']
     .map((id) => OFFERS.find((o) => o.id === id)!)
     .filter(Boolean);
 
@@ -78,7 +78,7 @@ export function Home() {
 
       {/* 5. Баннеры разделов */}
       <div className="block">
-        <BlockHead title="Пять сфер клуба" />
+        <BlockHead title="Шесть сфер клуба" />
         <div className="pad col" style={{ gap: 10 }}>
           {SECTIONS.map((s) => <SectionBanner key={s.id} s={s} />)}
         </div>

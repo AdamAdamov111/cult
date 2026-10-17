@@ -1,4 +1,4 @@
-export type SectionId = 'cosmetics' | 'sport' | 'travel' | 'beauty' | 'health';
+export type SectionId = 'cosmetics' | 'sport' | 'travel' | 'beauty' | 'health' | 'clubs';
 
 export interface Product {
   id: string;
