@@ -7,7 +7,7 @@ const pid = (slug: string) => PRODUCTS.find((p) => p.slug === slug)?.id || '';
 /** Сторис по сегментам клуба — вход в каждое направление. */
 export const STORIES: Story[] = [
   {
-    id: 'st-cosmetics', section: 'cosmetics', label: 'Косметика', cover: img('cream-absolute-youth'),
+    id: 'st-cosmetics', section: 'cosmetics', label: 'Косметика', cover: 'img/st-cosmetics.jpg',
     slides: [
       {
         image: img('cream-absolute-youth'), eyebrow: 'Клубная цена',
@@ -30,7 +30,7 @@ export const STORIES: Story[] = [
     ],
   },
   {
-    id: 'st-sport', section: 'sport', label: 'Спорт', cover: 'img/padel-court.jpg',
+    id: 'st-sport', section: 'sport', label: 'Спорт', cover: 'img/st-sport.jpg',
     slides: [
       {
         image: 'img/padel-court.jpg', eyebrow: 'First Padel Club',
@@ -47,7 +47,7 @@ export const STORIES: Story[] = [
     ],
   },
   {
-    id: 'st-travel', section: 'travel', label: 'Travel', cover: 'img/tt-beach.jpg',
+    id: 'st-travel', section: 'travel', label: 'Travel', cover: 'img/st-travel.jpg',
     slides: [
       {
         image: 'img/tt-beach.jpg', eyebrow: 'Travel Times · закрытый тариф',
@@ -70,7 +70,7 @@ export const STORIES: Story[] = [
     ],
   },
   {
-    id: 'st-beauty', section: 'beauty', label: 'Красота', cover: 'img/omny-face.jpg',
+    id: 'st-beauty', section: 'beauty', label: 'Красота', cover: 'img/st-beauty.jpg',
     slides: [
       {
         image: 'img/omny-face.jpg', eyebrow: 'Omny Beauty',
@@ -87,7 +87,7 @@ export const STORIES: Story[] = [
     ],
   },
   {
-    id: 'st-health', section: 'health', label: 'Здоровье', cover: 'img/jar-parilka.jpg',
+    id: 'st-health', section: 'health', label: 'Здоровье', cover: 'img/st-health.jpg',
     slides: [
       {
         image: 'img/mayr-building.jpg', eyebrow: 'MAYRVEDA 5★ · Кисловодск',
