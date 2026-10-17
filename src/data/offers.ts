@@ -128,7 +128,7 @@ export const OFFERS: Offer[] = [
     title: 'Ultraformer MPT, ультразвуковой SMAS-лифтинг', deal: '−45%',
     summary: 'Клиника эстетической медицины: безоперационный лифтинг на глубине SMAS. Эффект нарастает 3 месяца и держится до двух лет.',
     terms: ['Полное лицо и подбородочная зона', 'Консультация врача-косметолога', 'Контрольный визит через месяц', 'Домашний уход BYRAIN в подарок'],
-    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 марта', image: 'img/omny-face.jpg', kind: 'promo', value: 120000,
+    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 марта', image: 'img/omny-proc5.jpg', kind: 'promo', value: 120000,
   },
   {
     id: 'bt-omny-morpheus', section: 'beauty', brand: 'OMNY BEAUTY', city: 'Москва',
@@ -149,7 +149,7 @@ export const OFFERS: Offer[] = [
     title: 'Ботулинотерапия, техника full face', deal: '−25%',
     summary: 'Полное лицо в авторской технике: верхняя треть, периорбитальная зона и коррекция опущенных уголков.',
     terms: ['До 60 единиц препарата', 'Консультация и фотопротокол', 'Коррекция через 2 недели бесплатно'],
-    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 декабря', image: 'img/omny-face2.jpg', kind: 'promo', value: 34000,
+    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 декабря', image: 'img/omny-proc4.jpg', kind: 'promo', value: 34000,
   },
   {
     id: 'bt-omny-hydra', section: 'beauty', brand: 'OMNY BEAUTY', city: 'Москва',
@@ -170,28 +170,28 @@ export const OFFERS: Offer[] = [
     title: 'Fotona 4D, лазерное омоложение, курс из 3', deal: '−40%',
     summary: 'Четыре этапа за процедуру: лифтинг изнутри через слизистую, уплотнение дермы, выравнивание тона и финишная шлифовка.',
     terms: ['3 процедуры курсом', 'Все четыре этапа в каждой', 'Консультация врача перед курсом', 'Постуход включён'],
-    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 мая', image: 'img/omny-proc4.jpg', kind: 'promo', value: 108000,
+    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 мая', image: 'img/omny-proc6.jpg', kind: 'promo', value: 108000,
   },
   {
     id: 'bt-omny-exosome', section: 'beauty', brand: 'OMNY BEAUTY', city: 'Москва',
     title: 'Экзосомная терапия лица, курс из 3', deal: '−30%',
     summary: 'Протокол клиники на экзосомах: запуск регенерации, работа с тусклостью и мелкими морщинами после 35.',
     terms: ['3 процедуры курсом', 'Подбор протокола врачом', 'Лицо, шея и зона декольте', 'Интервал 2 недели'],
-    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 июля', image: 'img/omny-proc5.jpg', kind: 'promo', value: 75000,
+    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 июля', image: 'img/omny-lab.jpg', kind: 'promo', value: 75000,
   },
   {
     id: 'bt-omny-biorev', section: 'beauty', brand: 'OMNY BEAUTY', city: 'Москва',
     title: 'Биоревитализация, 3 процедуры', deal: '−25%',
     summary: 'Инъекционное увлажнение гиалуроновой кислотой: плотность, тонус и свежий тон кожи.',
     terms: ['3 процедуры курсом', 'Препарат на выбор врача', 'Анестезия включена', 'Интервал 2–3 недели'],
-    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 декабря', image: 'img/omny-proc6.jpg', kind: 'promo', value: 36000,
+    address: 'Москва, Omny Beauty Clinic', valid: 'до 31 декабря', image: 'img/omny-proc.jpg', kind: 'promo', value: 36000,
   },
   {
     id: 'bt-omny-icoone', section: 'beauty', brand: 'OMNY BEAUTY', city: 'Москва',
     title: 'Icoone, аппаратный массаж тела, 10 сеансов', deal: '−35%',
     summary: 'Микростимуляция тканей: лимфодренаж, работа с отёками и плотностью кожи. Хорошо идёт в связке с Emsculpt.',
     terms: ['10 сеансов по 45 минут', 'Замеры объёмов до и после', 'Костюм предоставляется', '2–3 раза в неделю'],
-    address: 'Москва, Omny Beauty Clinic', valid: 'до 30 сентября', image: 'img/omny-portrait.jpg', kind: 'promo', value: 55000,
+    address: 'Москва, Omny Beauty Clinic', valid: 'до 30 сентября', image: 'img/omny-team.jpg', kind: 'promo', value: 55000,
   },
 
   /* ====================== КЛУБЫ ====================== */

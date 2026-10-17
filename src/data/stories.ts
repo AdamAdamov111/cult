@@ -73,7 +73,7 @@ export const STORIES: Story[] = [
     id: 'st-beauty', section: 'beauty', label: 'Красота', cover: 'img/st-beauty.jpg',
     slides: [
       {
-        image: 'img/omny-face.jpg', eyebrow: 'Omny Beauty',
+        image: 'img/omny-proc5.jpg', eyebrow: 'Omny Beauty',
         title: 'SMAS-лифтинг Ultraformer, −45%',
         text: 'Безоперационный лифтинг на глубине SMAS. Эффект держится до двух лет.',
         cta: 'Записаться', target: { t: 'offer', id: 'bt-omny-smas' },

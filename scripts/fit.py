@@ -43,19 +43,13 @@ def compose(src, dst, w=1312, h=672, side='right', pad=0.0, quality=88, shade=0.
     iw = round(sw * ih / sh)
     photo = im.resize((iw, ih), Image.LANCZOS)
 
-    # фон: сильно размытая растянутая копия, чтобы тон совпал
-    bg = im.resize((w, h), Image.LANCZOS).filter(ImageFilter.GaussianBlur(radius=48))
+    # фон: размытая копия кадра во всю плашку — без полос и швов
+    bg = im.resize((w, h), Image.LANCZOS).filter(ImageFilter.GaussianBlur(radius=70))
     canvas = Image.new('RGB', (w, h))
     canvas.paste(bg, (0, 0))
 
-    # край фотографии растягиваем в поле, куда ляжет текст
     x = w - iw if side == 'right' else 0
     y = (h - ih) // 2
-    edge_col = photo.crop((0, 0, 6, ih)) if side == 'right' else photo.crop((iw - 6, 0, iw, ih))
-    if x > 0:
-        canvas.paste(edge_col.resize((x, ih), Image.LANCZOS), (0, y))
-    elif iw < w:
-        canvas.paste(edge_col.resize((w - iw, ih), Image.LANCZOS), (iw, y))
     canvas.paste(photo, (x, y))
 
     # мягкое затемнение со стороны подписей — чтобы текст читался на светлом кадре

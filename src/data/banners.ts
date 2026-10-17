@@ -41,7 +41,7 @@ export const BANNERS: Banner[] = [
     id: 'bn-omny', eyebrow: 'Omny Beauty Clinic',
     title: 'SMAS-лифтинг\nминус 45%',
     sub: 'Ultraformer MPT: безоперационный лифтинг с эффектом до двух лет',
-    cta: 'Записаться', image: 'img/omny-face.jpg', tone: 'dark',
+    cta: 'Записаться', image: 'img/omny-proc5.jpg', tone: 'dark',
     target: { t: 'offer', id: 'bt-omny-smas' }, sponsored: true,
   },
   {
