@@ -1,0 +1,43 @@
+{
+  "identifier" : "CULT-STOREKIT",
+  "nonRenewingSubscriptions" : [],
+  "products" : [],
+  "settings" : {
+    "_applicationInternalID" : "CULT",
+    "_developerTeamID" : "",
+    "_lastSynchronizedDate" : 0,
+    "_locale" : "ru_RU",
+    "_storefront" : "RUS"
+  },
+  "subscriptionGroups" : [
+    {
+      "id" : "cult.membership",
+      "localizations" : [],
+      "name" : "Членство CULT",
+      "subscriptions" : [
+        {
+          "adHocOffers" : [],
+          "codeOffers" : [],
+          "displayPrice" : "3000.00",
+          "familyShareable" : false,
+          "groupNumber" : 1,
+          "internalID" : "cult-monthly",
+          "introductoryOffer" : null,
+          "localizations" : [
+            {
+              "description" : "Клубные цены BYRAIN и предложения партнёров",
+              "displayName" : "Членство CULT",
+              "locale" : "ru_RU"
+            }
+          ],
+          "productID" : "ru.byrain.cult.membership.monthly",
+          "recurringSubscriptionPeriod" : "P1M",
+          "referenceName" : "Членство CULT, месяц",
+          "subscriptionGroupID" : "cult.membership",
+          "type" : "RecurringSubscription"
+        }
+      ]
+    }
+  ],
+  "version" : { "major" : 4, "minor" : 0 }
+}

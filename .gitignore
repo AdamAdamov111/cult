@@ -6,3 +6,9 @@ data/raw
 .env.*
 server/db.json
 worker/.wrangler
+
+# iOS
+ios/build/
+ios/build-release/
+ios/CULT.xcodeproj/
+ios/DerivedData/
