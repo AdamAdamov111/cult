@@ -7,7 +7,7 @@ import { asset } from '../lib/assets';
 
 const SECTION_OF: Record<string, any> = {
   'bn-maldives': 'travel', 'bn-mayrveda': 'health', 'bn-padel': 'sport',
-  'bn-omny': 'beauty', 'bn-clubs': 'clubs', 'bn-join': 'cosmetics', 'bn-mask': 'cosmetics', 'bn-brands': 'cosmetics',
+  'bn-omny': 'beauty', 'bn-join': 'cosmetics', 'bn-mask': 'cosmetics', 'bn-brands': 'cosmetics',
 };
 
 export function BannerCarousel({ onGo }: { onGo: (t: Target) => void }) {

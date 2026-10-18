@@ -45,13 +45,6 @@ export const BANNERS: Banner[] = [
     target: { t: 'offer', id: 'bt-omny-smas' }, sponsored: true,
   },
   {
-    id: 'bn-clubs', eyebrow: 'Кросс-членство',
-    title: 'Двери других\nзакрытых клубов',
-    sub: 'А-Клуб, Атланты, Club 500, Эквиум — гостевой вход для членов CULT',
-    cta: 'Смотреть клубы', image: 'img/sec-clubs.jpg', tone: 'dark',
-    target: { t: 'section', id: 'clubs' },
-  },
-  {
     id: 'bn-brands', eyebrow: 'Новое в клубе',
     title: 'GREYMY, ORIBE\nи KEVIN MURPHY',
     sub: 'Салонный уход за волосами по клубным ценам — до −35%',
