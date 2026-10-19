@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>logFormatVersion</key>
+	<integer>12</integer>
+	<key>logs</key>
+	<dict>
+		<key>B90BD229-B708-4610-96CF-E3620C2D8C39</key>
+		<dict>
+			<key>className</key>
+			<string>IDECommandLineBuildLog</string>
+			<key>documentTypeString</key>
+			<string>&lt;nil&gt;</string>
+			<key>domainType</key>
+			<string>Xcode.IDEActivityLogDomainType.BuildLog</string>
+			<key>fileName</key>
+			<string>B90BD229-B708-4610-96CF-E3620C2D8C39.xcactivitylog</string>
+			<key>hasPrimaryLog</key>
+			<true/>
+			<key>primaryObservable</key>
+			<dict>
+				<key>highLevelStatus</key>
+				<string>S</string>
+				<key>totalNumberOfAnalyzerIssues</key>
+				<integer>0</integer>
+				<key>totalNumberOfErrors</key>
+				<integer>0</integer>
+				<key>totalNumberOfTestFailures</key>
+				<integer>0</integer>
+				<key>totalNumberOfWarnings</key>
+				<integer>0</integer>
+			</dict>
+			<key>schemeIdentifier-containerName</key>
+			<string>CULT project</string>
+			<key>schemeIdentifier-schemeName</key>
+			<string>CULT</string>
+			<key>schemeIdentifier-sharedScheme</key>
+			<integer>1</integer>
+			<key>signature</key>
+			<string>Building project CULT with scheme CULT and configuration Release</string>
+			<key>timeStartedRecording</key>
+			<real>814084524.79554105</real>
+			<key>timeStoppedRecording</key>
+			<real>814084548.83491504</real>
+			<key>title</key>
+			<string>Building project CULT with scheme CULT and configuration Release</string>
+			<key>uniqueIdentifier</key>
+			<string>B90BD229-B708-4610-96CF-E3620C2D8C39</string>
+		</dict>
+	</dict>
+</dict>
+</plist>

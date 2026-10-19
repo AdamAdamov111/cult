@@ -1,0 +1,141 @@
+{
+  "" : {
+    "const-values" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary.swiftconstvalues",
+    "dependencies" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary.d",
+    "diagnostics" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary.dia",
+    "emit-module-dependencies" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary-emit-module.d",
+    "emit-module-diagnostics" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary-emit-module.dia",
+    "pch" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary-Bridging-header.pch",
+    "swift-dependencies" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary.swiftdeps"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/App/CultApp.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CultApp.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CultApp.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CultApp.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/App/Haptics.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Haptics.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Haptics.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Haptics.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/App/RootView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/RootView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/RootView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/RootView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/App/Router.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Router.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Router.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Router.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/App/Theme.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Theme.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Theme.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Theme.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Components/BannerCarousel.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/BannerCarousel.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/BannerCarousel.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/BannerCarousel.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Components/Cards.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Cards.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Cards.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Cards.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Components/Pieces.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Pieces.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Pieces.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Pieces.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Components/QRView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/QRView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/QRView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/QRView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Components/Stories.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Stories.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Stories.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Stories.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Models/Catalog.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Catalog.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Catalog.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Catalog.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Models/ImageStore.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ImageStore.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ImageStore.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ImageStore.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Models/Models.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Models.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Models.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Models.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/BrandView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/BrandView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/BrandView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/BrandView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/CartView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CartView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CartView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CartView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/CatalogView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CatalogView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CatalogView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CatalogView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/HomeView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/HomeView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/HomeView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/HomeView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/JoinView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/JoinView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/JoinView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/JoinView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/OfferView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/OfferView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/OfferView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/OfferView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/ProductView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ProductView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ProductView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ProductView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/ProfileView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ProfileView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ProfileView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/ProfileView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Screens/SectionView.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/SectionView.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/SectionView.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/SectionView.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Store/AppState.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/AppState.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/AppState.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/AppState.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Store/Membership.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Membership.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Membership.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Membership.o"
+  },
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Store/Payments.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Payments.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Payments.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/Payments.o"
+  },
+  "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/DerivedSources/GeneratedAssetSymbols.swift" : {
+    "index-unit-output-path" : "/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/GeneratedAssetSymbols.o",
+    "llvm-bc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/GeneratedAssetSymbols.bc",
+    "object" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/GeneratedAssetSymbols.o"
+  }
+}

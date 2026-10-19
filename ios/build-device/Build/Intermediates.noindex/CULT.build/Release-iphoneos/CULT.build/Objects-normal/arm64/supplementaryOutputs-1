@@ -1,0 +1,12 @@
+{
+  "/Users/adamedgarovich/cult/ios/CULT/Sources/Store/AppState.swift" : {
+    "abi-baseline-json" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT.abi.json",
+    "const-values" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary.swiftconstvalues",
+    "dependencies" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary.d",
+    "diagnostics" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-primary.dia",
+    "objc-header" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT-Swift.h",
+    "swiftdoc" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT.swiftdoc",
+    "swiftmodule" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT.swiftmodule",
+    "swiftsourceinfo" : "/Users/adamedgarovich/cult/ios/build-device/Build/Intermediates.noindex/CULT.build/Release-iphoneos/CULT.build/Objects-normal/arm64/CULT.swiftsourceinfo"
+  }
+}

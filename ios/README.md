@@ -83,7 +83,33 @@ Xcode StoreKit недоступен, и членство выдаётся лок
 как цель, в Signing & Capabilities указать свой Apple ID как команду. Сборка
 живёт 7 дней, потом пересобрать. Для себя и для демонстрации в руках — хватает.
 
-**Партнёрам — TestFlight.** Нужен Apple Developer Program, 99 $ в год.
+**Партнёрам без Apple Developer Program — два бесплатных пути.**
+
+*Браузер.* Залить `CULT-simulator.zip` на appetize.io (бесплатный аккаунт) и
+разослать ссылку. Партнёр открывает её на компьютере и крутит приложение прямо
+в браузере — ставить ничего не нужно. Это облачный симулятор, на телефон
+приложение не попадает. Бесплатный тариф жёсткий: порядка 30 минут в месяц,
+сессия до трёх минут, сборка публична по ссылке.
+
+*Реальный iPhone.* Собрать неподписанный IPA и отдать партнёру вместе с
+[Sideloadly](https://sideloadly.io) или [AltStore](https://altstore.io).
+Утилита подписывает файл **его собственным бесплатным Apple ID** — платный
+аккаунт не нужен:
+
+```bash
+xcodebuild -project CULT.xcodeproj -scheme CULT -sdk iphoneos -configuration Release \
+  -derivedDataPath build-device CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO \
+  CODE_SIGN_IDENTITY="" build
+mkdir -p /tmp/ipa/Payload && cp -R build-device/Build/Products/Release-iphoneos/CULT.app /tmp/ipa/Payload/
+(cd /tmp/ipa && zip -qr ~/Desktop/CULT-unsigned.ipa Payload)
+```
+
+Ограничения Apple, а не утилит: подпись живёт 7 дней, затем переподписать;
+не больше трёх таких приложений на один Apple ID; нужен компьютер с Windows или
+macOS хотя бы один раз. На iPhone включить режим разработчика и доверить
+сертификату в «VPN и управление устройством».
+
+**Партнёрам без возни — TestFlight.** Нужен Apple Developer Program, 99 $ в год.
 Порядок: оплатить программу → в App Store Connect создать приложение с bundle id
 `ru.byrain.cult` → в Xcode Product → Archive → Distribute App → App Store Connect
 → в TestFlight добавить внешних тестировщиков. Они получают ссылку-приглашение и
