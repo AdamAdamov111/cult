@@ -1,0 +1,17 @@
+{
+  "name": "CULT — закрытый клуб BYRAIN",
+  "short_name": "CULT",
+  "description": "BYRAIN −50% и GREYMY −35% для членов закрытого клуба",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0a0a0a",
+  "theme_color": "#ffffff",
+  "lang": "ru",
+  "icons": [
+    { "src": "icons/cult-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "icons/cult-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "icons/cult-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
