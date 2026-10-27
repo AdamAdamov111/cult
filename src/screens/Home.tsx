@@ -1,142 +1,171 @@
-import { useState } from 'react';
-import { BannerCarousel } from '../components/BannerCarousel';
-import { StoriesRow, StoriesViewer } from '../components/Stories';
-import { OfferCard, ProductCard, SectionBanner } from '../components/Cards';
-import { BrandRow } from '../components/BrandRow';
-import { BlockHead, money } from '../components/Primitives';
-import { IcCrown, IcRight, IcSpark } from '../components/Icons';
-import { SECTIONS } from '../data/sections';
-import { COMING, HIT_PRODUCTS, ON_SALE } from '../data/products';
-import { OFFERS, TOTAL_OFFER_VALUE } from '../data/offers';
-import { useApp } from '../store';
-import { goTarget, useNav } from '../router';
+import { IcCrown, IcRight, IcShield, IcTruck, IcReturn } from '../components/Icons';
+import { ProductCard } from '../components/ProductCard';
+import { SectionHead } from '../components/ui';
+import { asset } from '../lib/assets';
+import { money, plural, useShop } from '../store';
+import { useNav } from '../router';
+import {
+  BRANDS, CATEGORIES, COMING, ON_SALE, hits,
+  MEMBERSHIP_PRICE, countFor,
+} from '../data/catalog';
 
 export function Home() {
-  const [story, setStory] = useState<number | null>(null);
-  const member = useApp((s) => s.isMember());
-  const savedTotal = useApp((s) => s.savedTotal);
-  const go = useNav((s) => s.go);
-  const setTab = useNav((s) => s.setTab);
+  const member = useShop((s) => s.isMember());
+  const savedTotal = useShop((s) => s.savedTotal);
+  const { go, openCatalog } = useNav();
 
-  const onGo = goTarget;
-
-  // по одному сильному предложению из каждой сферы
-  const topOffers = ['tr-maldives', 'sp-wc-year', 'bt-omny-smas', 'hl-mayr-detox', 'hl-jar-parenie', 'sp-padel-court']
-    .map((id) => OFFERS.find((o) => o.id === id)!)
-    .filter(Boolean);
+  const flagship = [...ON_SALE].filter((p) => p.cat !== 'set').sort((a, b) => b.rrp - a.rrp)[0];
 
   return (
-    <div className="screen screen--root">
-      {/* 1. Карусель мест под партнёров */}
-      <div className="block--tight"><BannerCarousel onGo={onGo} /></div>
-
-      {/* 2. Сторис по сегментам */}
-      <div className="block--tight"><StoriesRow onOpen={setStory} /></div>
-
-      {/* 3. Полоса членства / накопленной экономии */}
-      <div className="block--tight pad">
-        {member
-          ? (
-            <div className="saved-strip">
-              <IcSpark size={20} className="gold" />
-              <div style={{ lineHeight: 1.35, flex: 1 }}>
-                {savedTotal > 0 ? (
-                  <>
-                    <div className="micro" style={{ color: 'var(--gold-ink)' }}>Сэкономлено в клубе</div>
-                    <div className="saved-strip__v">{money(savedTotal)}</div>
-                  </>
-                ) : (
-                  <>
-                    <div className="h3" style={{ color: 'var(--gold-ink)' }}>Клубные цены открыты</div>
-                    <div className="micro">Минус 50% на весь каталог BYRAIN и доступ ко всем предложениям партнёров</div>
-                  </>
-                )}
-              </div>
-            </div>
-          )
-          : (
-            <button className="saved-strip" style={{ width: '100%', textAlign: 'left' }} onClick={() => go({ k: 'join' })}>
-              <IcCrown size={20} className="gold" />
-              <div style={{ lineHeight: 1.35, flex: 1 }}>
-                <div className="h3" style={{ color: 'var(--gold-ink)' }}>Членство 3 000 ₽ в месяц</div>
-                <div className="micro">Вся косметика −50%, доступ к {OFFERS.length} предложениям партнёров</div>
-              </div>
-              <IcRight size={18} className="gold" />
-            </button>
-          )}
-      </div>
-
-      {/* 4. Хиты клуба */}
-      <div className="block">
-        <BlockHead title="Хиты клуба" link="Весь каталог" onLink={() => setTab('catalog')} />
-        <div className="hscroll">
-          {HIT_PRODUCTS.map((p) => (
-            <div key={p.id} style={{ width: 154 }}><ProductCard p={p} /></div>
-          ))}
-        </div>
-      </div>
-
-      {/* 5. Баннеры разделов */}
-      <div className="block">
-        <BlockHead title="Пять сфер клуба" />
-        <div className="pad col" style={{ gap: 10 }}>
-          {SECTIONS.map((s) => <SectionBanner key={s.id} s={s} />)}
-        </div>
-        <div className="pad" style={{ marginTop: 12 }}>
-          <div className="note">
-            Суммарная выгода по действующим предложениям партнёров — до {money(TOTAL_OFFER_VALUE)} в год.
-            Доступ открывается сразу после оплаты членства.
-          </div>
-        </div>
-      </div>
-
-      {/* 6. Предложения партнёров — срез */}
-      <div className="block">
-        <BlockHead title="Сейчас в клубе" />
-        <div className="hscroll">
-          {topOffers.map((o) => (
-            <div key={o.id} style={{ width: 268 }}><OfferCard o={o} /></div>
-          ))}
-        </div>
-      </div>
-
-      {/* 7. Бренды клуба */}
-      <div className="block">
-        <BlockHead title="Бренды клуба" link="Все бренды" onLink={() => go({ k: 'section', id: 'cosmetics' })} />
-        <BrandRow />
-      </div>
-
-      {/* 8. Выкладка косметики BYRAIN */}
-      <div className="block">
-        <BlockHead title="Косметика BYRAIN" link="Все товары" onLink={() => go({ k: 'section', id: 'cosmetics' })} />
-        <div className="grid2">
-          {ON_SALE.slice(0, 8).map((p) => <ProductCard key={p.id} p={p} />)}
-        </div>
-        <div className="pad" style={{ marginTop: 18 }}>
-          <button className="btn btn--outline btn--block" onClick={() => go({ k: 'section', id: 'cosmetics' })}>
-            Показать все {ON_SALE.length} товаров
+    <div className="screen">
+      {/* 1. Герой */}
+      <section className="hero">
+        <img className="hero__img" src={asset('img/hero-glass.jpg')} alt="" />
+        <div className="hero__scrim" />
+        <div className="hero__body">
+          <span className="t-label" style={{ color: 'var(--gold)' }}>Швейцарская лаборатория</span>
+          <h1 className="hero__title">Премиальный уход<br />по клубной цене</h1>
+          <p className="hero__sub">
+            BYRAIN −50%, GREYMY −35%. Членство {money(MEMBERSHIP_PRICE)} в месяц
+            окупается первой покупкой.
+          </p>
+          <button className="hero__cta" onClick={() => openCatalog({ cat: 'all', brandId: 'all' })}>
+            Смотреть каталог
           </button>
         </div>
+      </section>
+
+      {/* 2. Клубная полоса */}
+      <div className="pad" style={{ marginTop: 18 }}>
+        {member ? (
+          <div className="save">
+            <IcCrown size={19} className="gold" />
+            <div className="grow">
+              {savedTotal > 0 ? (
+                <>
+                  <div className="t-micro gold">Сэкономлено в клубе</div>
+                  <div className="save__v">{money(savedTotal)}</div>
+                </>
+              ) : (
+                <>
+                  <div className="t-h3 gold">Клубные цены открыты</div>
+                  <div className="t-micro">Минус 50% на BYRAIN и минус 35% на GREYMY</div>
+                </>
+              )}
+            </div>
+          </div>
+        ) : (
+          <button className="save" style={{ width: '100%', textAlign: 'left' }} onClick={() => go({ k: 'join' })}>
+            <IcCrown size={19} className="gold" />
+            <div className="grow">
+              <div className="t-h3 gold">Членство {money(MEMBERSHIP_PRICE)} в месяц</div>
+              <div className="t-micro">
+                {flagship && `${flagship.title} — ${money(flagship.club)} вместо ${money(flagship.rrp)}`}
+              </div>
+            </div>
+            <IcRight size={17} className="gold" />
+          </button>
+        )}
       </div>
 
-      {/* 8. Скоро */}
-      {COMING.length > 0 && (
-        <div className="block">
-          <BlockHead title="Скоро в клубе" />
-          <div className="hscroll">
-            {COMING.map((p) => <div key={p.id} style={{ width: 154 }}><ProductCard p={p} /></div>)}
+      {/* 3. Бестселлеры */}
+      <section className="sec">
+        <SectionHead title="Бестселлеры" more="Весь каталог"
+                     onMore={() => openCatalog({ cat: 'all', brandId: 'all' })} />
+        <div className="rail">
+          {hits.map((p) => <div key={p.id} style={{ width: 164 }}><ProductCard p={p} /></div>)}
+        </div>
+      </section>
+
+      {/* 4. Бренды */}
+      <section className="sec">
+        <SectionHead title="Два бренда клуба" />
+        <div className="tiles">
+          {BRANDS.map((b) => (
+            <button key={b.id} className="tile" onClick={() => go({ k: 'brand', id: b.id })}>
+              <img className="tile__img" src={asset(b.tile)} alt={b.title} loading="lazy" />
+              <span className="tile__scrim" />
+              <span className="tile__body">
+                <span className="tile__name">{b.title}</span>
+                <span className="tile__meta">{countFor('all', b.id)} {plural(countFor('all', b.id), 'позиция', 'позиции', 'позиций')} · −{Math.round(b.discount * 100)}%</span>
+              </span>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {/* 5. Категории */}
+      <section className="sec">
+        <SectionHead title="Категории" />
+        <div className="chips">
+          {CATEGORIES.filter((c) => c.id !== 'all')
+            .map((c) => ({ ...c, n: countFor(c.id, 'all') }))
+            .filter((c) => c.n > 0)
+            .sort((a, b) => b.n - a.n)
+            .map((c) => {
+            const n = c.n;
+            return (
+              <button key={c.id} className="chip" onClick={() => openCatalog({ cat: c.id, brandId: 'all' })}>
+                {c.title}<span className="chip__n">{n}</span>
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      {/* 6. Редакционный блок */}
+      <section className="sec">
+        <div className="ed" onClick={() => go({ k: 'brand', id: 'byrain' })}>
+          <img className="ed__img" src={asset('img/ed-lab.jpg')} alt="" loading="lazy" />
+          <span className="ed__scrim" />
+          <div className="ed__body">
+            <span className="t-label" style={{ color: 'var(--gold)' }}>BYRAIN Switzerland</span>
+            <h3 className="ed__title">Пептиды, факторы роста<br />и фитоэстрогены</h3>
+            <p className="ed__text">
+              Формулы, разработанные для кожи в период гормонального старения.
+              Клинически подтверждённые активы в концентрациях, которые работают.
+            </p>
           </div>
         </div>
+      </section>
+
+      {/* 7. Гарантии */}
+      <section className="sec--tight">
+        <div className="trust">
+          <div className="trust__i"><IcShield size={19} className="muted" /><span className="trust__t">Оригинал<br />от бренда</span></div>
+          <div className="trust__i"><IcTruck size={19} className="muted" /><span className="trust__t">Доставка<br />по России</span></div>
+          <div className="trust__i"><IcReturn size={19} className="muted" /><span className="trust__t">Возврат<br />14 дней</span></div>
+        </div>
+      </section>
+
+      {/* 8. Каталог */}
+      <section className="sec">
+        <SectionHead title="Весь каталог" more={`${ON_SALE.length} ${plural(ON_SALE.length, 'товар', 'товара', 'товаров')}`}
+                     onMore={() => openCatalog({ cat: 'all', brandId: 'all' })} />
+        <div className="grid">
+          {ON_SALE.slice(0, 6).map((p) => <ProductCard key={p.id} p={p} />)}
+        </div>
+        <div className="pad" style={{ marginTop: 22 }}>
+          <button className="btn btn--line btn--block" onClick={() => openCatalog({ cat: 'all', brandId: 'all' })}>
+            Показать все {ON_SALE.length} {plural(ON_SALE.length, 'товар', 'товара', 'товаров')}
+          </button>
+        </div>
+      </section>
+
+      {/* 9. Скоро */}
+      {COMING.length > 0 && (
+        <section className="sec">
+          <SectionHead title="Скоро в клубе" />
+          <div className="rail">
+            {COMING.map((p) => <div key={p.id} style={{ width: 164 }}><ProductCard p={p} /></div>)}
+          </div>
+        </section>
       )}
 
-      <div className="pad" style={{ margin: '34px 0 10px', textAlign: 'center' }}>
+      <footer className="pad" style={{ margin: '48px 0 16px', textAlign: 'center' }}>
         <div className="wordmark" style={{ fontSize: 13, color: 'var(--faint)' }}>Cult</div>
-        <div className="micro" style={{ marginTop: 7 }}>Закрытый клуб BYRAIN · Швейцария</div>
-      </div>
-
-      {story !== null && (
-        <StoriesViewer startIndex={story} onClose={() => setStory(null)} onGo={onGo} />
-      )}
+        <div className="t-micro" style={{ marginTop: 8 }}>Закрытый клуб BYRAIN · Швейцария</div>
+      </footer>
     </div>
   );
 }

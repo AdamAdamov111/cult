@@ -1,44 +1,43 @@
-import { useEffect, useState } from 'react';
-import { Empty, Qty, money } from '../components/Primitives';
-import { ProductCard } from '../components/Cards';
-import { IcBag, IcCheck, IcCrown, IcSpark, IcTrash, IcTruck } from '../components/Icons';
-import { PRODUCT_MAP, ON_SALE } from '../data/products';
-import { useApp, useCartTotals } from '../store';
-import { useNav } from '../router';
-import { haptic, setMainButton } from '../lib/telegram';
-import { DEMO_MODE, payOrder } from '../lib/payments';
-import type { Order } from '../types';
+import { useState } from 'react';
+import { IcBag, IcCheck, IcCrown, IcTrash } from '../components/Icons';
+import { ProductCard } from '../components/ProductCard';
+import { Empty, Qty, SectionHead } from '../components/ui';
 import { asset } from '../lib/assets';
+import { haptic } from '../lib/telegram';
+import { DEMO_MODE, payOrder } from '../lib/payments';
+import { money, useCart, useShop, type Order } from '../store';
+import { useNav } from '../router';
+import { FREE_SHIPPING_FROM, SHIPPING_COST, hits } from '../data/catalog';
 
 const DELIVERY = [
-  { id: 'courier', title: 'Курьером по Москве', sub: 'на следующий день', price: 400 },
+  { id: 'courier', title: 'Курьером по Москве', sub: 'на следующий день', price: SHIPPING_COST },
   { id: 'cdek', title: 'СДЭК по России', sub: '2–5 дней, до пункта выдачи', price: 450 },
   { id: 'pickup', title: 'Самовывоз, Москва', sub: 'шоурум, по записи', price: 0 },
 ] as const;
 
 export function Cart() {
-  const cart = useApp((s) => s.cart);
-  const totals = useCartTotals();
-  const member = useApp((s) => s.isMember());
-  const setQty = useApp((s) => s.setQty);
-  const removeLine = useApp((s) => s.removeLine);
-  const profile = useApp((s) => s.profile);
-  const setProfile = useApp((s) => s.setProfile);
-  const placeOrder = useApp((s) => s.placeOrder);
-  const say = useApp((s) => s.say);
+  const cart = useCart();
+  const member = useShop((s) => s.isMember());
+  const setQty = useShop((s) => s.setQty);
+  const remove = useShop((s) => s.remove);
+  const profile = useShop((s) => s.profile);
+  const setProfile = useShop((s) => s.setProfile);
+  const placeOrder = useShop((s) => s.placeOrder);
+  const say = useShop((s) => s.say);
   const { go, setTab } = useNav();
 
   const [touched, setTouched] = useState(false);
   const [busy, setBusy] = useState(false);
   const [done, setDone] = useState<Order | null>(null);
 
-  const ship = DELIVERY.find((d) => d.id === profile.delivery)!;
-  const grand = totals.club + ship.price;
+  const option = DELIVERY.find((d) => d.id === profile.delivery) ?? DELIVERY[0];
+  const shipping = option.id === 'pickup' ? 0 : (cart.freeShipping ? 0 : option.price);
+  const grand = cart.club + shipping;
 
   const errs = {
     name: profile.name.trim().length < 2,
     phone: profile.phone.replace(/\D/g, '').length < 10,
-    address: profile.delivery !== 'pickup' && profile.address.trim().length < 6,
+    address: option.id !== 'pickup' && profile.address.trim().length < 6,
   };
   const valid = !errs.name && !errs.phone && !errs.address;
 
@@ -47,187 +46,222 @@ export function Cart() {
     if (!member) { go({ k: 'join' }); return; }
     if (!valid) { haptic.err(); say('Заполните контакты и адрес'); return; }
     setBusy(true);
-    haptic.press();
-    const r = await payOrder({ lines: cart.map((l) => ({ id: l.id, qty: l.qty })), total: grand });
+    const r = await payOrder({ lines: cart.lines.map((l) => ({ id: l.product.id, qty: l.qty })), total: grand });
     setBusy(false);
     if (r === 'cancelled') return;
-    if (r === 'failed') { say('Оплата не прошла'); return; }
-    setDone(placeOrder(ship.price));
+    if (r === 'failed') { haptic.err(); say('Оплата не прошла'); return; }
+    setDone(placeOrder(shipping));
   };
 
-  useEffect(() => {
-    if (!cart.length || done) { setMainButton(null); return; }
-    setMainButton(
-      member
-        ? { text: `ОПЛАТИТЬ ${money(grand)}`, onClick: pay, active: !busy }
-        : { text: 'ВСТУПИТЬ И КУПИТЬ ПО КЛУБНОЙ ЦЕНЕ', onClick: () => go({ k: 'join' }) },
-    );
-    return () => setMainButton(null);
-  }, [cart.length, member, grand, busy, done, valid]);
-
-  /* ----- Успех ----- */
+  /* ---------- Успех ---------- */
   if (done) {
     return (
-      <div className="screen">
-        <div className="pad" style={{ paddingTop: 36, textAlign: 'center' }}>
-          <div style={{ width: 62, height: 62, borderRadius: '50%', background: 'var(--gold-wash)', display: 'grid', placeItems: 'center', margin: '0 auto 18px', color: 'var(--gold-ink)' }}>
+      <div className="screen pad" style={{ paddingTop: 44 }}>
+        <div style={{ textAlign: 'center' }}>
+          <div style={{
+            width: 64, height: 64, borderRadius: '50%', background: 'var(--gold-wash)',
+            display: 'grid', placeItems: 'center', margin: '0 auto 20px', color: 'var(--gold-ink)',
+          }}>
             <IcCheck size={30} />
           </div>
-          <h1 className="h1">Заказ {done.id} оплачен</h1>
-          <p className="small muted" style={{ marginTop: 9 }}>
-            Подтверждение придёт в этот чат. Сэкономлено {money(done.saved)}.
+          <h1 className="t-h1">Заказ {done.id} оплачен</h1>
+          <p className="t-sm muted" style={{ marginTop: 10 }}>
+            Подтверждение придёт на почту. Сэкономлено {money(done.saved)}.
           </p>
         </div>
-        <div className="pad block--tight">
-          <div className="plist">
-            {done.lines.map((l, i) => (
-              <div className="prow" key={i}>
-                <span className="prow__l clamp1" style={{ flex: 1 }}>{l.title}</span>
-                <span className="prow__v num">{l.qty} × {money(l.price)}</span>
-              </div>
-            ))}
-            <div className="prow"><span className="prow__l">Доставка</span><span className="prow__v num">{done.shipping ? money(done.shipping) : 'бесплатно'}</span></div>
-            <div className="prow"><span className="prow__l">Итого</span><span className="prow__v num" style={{ color: 'var(--ink)', fontWeight: 700 }}>{money(done.total)}</span></div>
+
+        <div className="list" style={{ marginTop: 24 }}>
+          {done.lines.map((l, i) => (
+            <div className="lrow" key={i}>
+              <span className="lrow__l clamp1 grow">{l.title}</span>
+              <span className="lrow__v num">{l.qty} × {money(l.price)}</span>
+            </div>
+          ))}
+          <div className="lrow">
+            <span className="lrow__l">Доставка</span>
+            <span className="lrow__v num">{done.shipping ? money(done.shipping) : 'бесплатно'}</span>
           </div>
-          <button className="btn btn--primary btn--block btn--lg" style={{ marginTop: 16 }} onClick={() => { setDone(null); setTab('home'); }}>
-            Продолжить покупки
-          </button>
-          <button className="btn btn--ghost btn--block" style={{ marginTop: 9 }} onClick={() => { setDone(null); setTab('profile'); go({ k: 'orders' }); }}>
-            Мои заказы
-          </button>
+          <div className="lrow">
+            <span className="lrow__l">Итого</span>
+            <span className="lrow__v num" style={{ color: 'var(--ink)', fontWeight: 700 }}>{money(done.total)}</span>
+          </div>
         </div>
+
+        <button className="btn btn--dark btn--block" style={{ marginTop: 20 }}
+                onClick={() => { setDone(null); setTab('home'); }}>
+          Продолжить покупки
+        </button>
+        <button className="btn btn--soft btn--block" style={{ marginTop: 10 }}
+                onClick={() => { setDone(null); setTab('profile'); go({ k: 'orders' }); }}>
+          Мои заказы
+        </button>
+        <div style={{ height: 36 }} />
       </div>
     );
   }
 
-  /* ----- Пустая ----- */
-  if (!cart.length) {
+  /* ---------- Пустая ---------- */
+  if (!cart.lines.length) {
     return (
       <div className="screen">
-        <Empty icon={<IcBag size={56} />} title="Корзина пуста"
-               text="Клубные цены на всю косметику BYRAIN — минус 50% от цены с полки."
-               action={<button className="btn btn--primary" onClick={() => setTab('catalog')}>Открыть каталог</button>} />
-        <div className="block">
-          <div className="block-head"><h2 className="h2">Хиты клуба</h2></div>
-          <div className="hscroll">
-            {ON_SALE.slice(0, 6).map((p) => <div key={p.id} style={{ width: 150 }}><ProductCard p={p} /></div>)}
+        <Empty icon={<IcBag size={46} />} title="Корзина пуста"
+               text="Клубные цены на весь ассортимент: BYRAIN −50%, GREYMY −35%."
+               action={<button className="btn btn--dark" onClick={() => setTab('catalog')}>Открыть каталог</button>} />
+        <section className="sec">
+          <SectionHead title="Бестселлеры" />
+          <div className="rail">
+            {hits.map((p) => <div key={p.id} style={{ width: 160 }}><ProductCard p={p} /></div>)}
           </div>
-        </div>
+        </section>
+        <div style={{ height: 36 }} />
       </div>
     );
   }
 
-  /* ----- Корзина + оформление на одном экране ----- */
+  /* ---------- Корзина и оформление ---------- */
   return (
-    <div className="screen">
-      <div className="pad" style={{ paddingTop: 14 }}>
-        <h1 className="h1">Корзина</h1>
+    <div className="screen pad" style={{ paddingTop: 14 }}>
+      <h1 className="t-h1">Корзина</h1>
 
-        <div style={{ marginTop: 6 }}>
-          {cart.map((l) => {
-            const p = PRODUCT_MAP.get(l.id);
-            if (!p) return null;
-            return (
-              <div className="citem" key={l.id}>
-                <div className="citem__media" onClick={() => go({ k: 'product', id: p.id })}>
-                  {p.images[0] && <img className="citem__img" src={asset(p.images[0])} alt="" loading="lazy" />}
-                </div>
-                <div style={{ flex: 1, minWidth: 0 }}>
-                  <div className="row" style={{ alignItems: 'flex-start' }}>
-                    <div className="citem__title clamp2" style={{ flex: 1 }} onClick={() => go({ k: 'product', id: p.id })}>{p.title}</div>
-                    <button className="citem__del" onClick={() => removeLine(l.id)} aria-label="Удалить"><IcTrash size={16} /></button>
-                  </div>
-                  <div className="price price--sm" style={{ marginTop: 5 }}>
-                    <span className="price__club">{money(p.club)}</span>
-                    <span className="price__rrp">{money(p.rrp)}</span>
-                  </div>
-                  <div style={{ marginTop: 9 }}><Qty value={l.qty} onChange={(v) => setQty(l.id, v)} min={0} /></div>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Экономия */}
-        <div className="saved-strip" style={{ marginTop: 16 }}>
-          <IcSpark size={20} className="gold" />
-          <div style={{ lineHeight: 1.3, flex: 1 }}>
-            <div className="micro" style={{ color: 'var(--gold-ink)' }}>
-              {member ? 'Экономия на этом заказе' : 'Сэкономите, вступив в клуб'}
+      <div style={{ marginTop: 8 }}>
+        {cart.lines.map(({ product: p, qty }) => (
+          <div className="line" key={p.id}>
+            <div className="line__media" onClick={() => go({ k: 'product', id: p.id })}>
+              <img className="line__img" src={asset(p.images[0])} alt="" loading="lazy" />
             </div>
-            <div className="saved-strip__v">{money(totals.saved)}</div>
+            <div className="grow">
+              <div className="row" style={{ alignItems: 'flex-start' }}>
+                <div className="grow" onClick={() => go({ k: 'product', id: p.id })}>
+                  <div className="card__brand">{p.brand}</div>
+                  <div className="line__title clamp2" style={{ marginTop: 3 }}>{p.title}</div>
+                </div>
+                <button className="line__del" onClick={() => remove(p.id)} aria-label="Удалить">
+                  <IcTrash size={16} />
+                </button>
+              </div>
+              <div className="price price--sm" style={{ marginTop: 7 }}>
+                <span className="price__now">{money(p.club)}</span>
+                <span className="price__was">{money(p.rrp)}</span>
+              </div>
+              <div style={{ marginTop: 10 }}>
+                <Qty value={qty} onChange={(v) => setQty(p.id, v)} min={0} />
+              </div>
+            </div>
           </div>
-        </div>
+        ))}
+      </div>
 
-        {!member && (
-          <button className="btn btn--gold btn--block btn--lg" style={{ marginTop: 11 }} onClick={() => go({ k: 'join' })}>
-            <IcCrown size={18} />Вступить за 3 000 ₽ и сэкономить {money(totals.saved)}
-          </button>
-        )}
-
-        {/* Доставка */}
-        <div className="block--tight">
-          <div className="eyebrow" style={{ marginBottom: 9 }}>Доставка</div>
-          <div className="radio-list">
-            {DELIVERY.map((d) => (
-              <button key={d.id} className={`radio${profile.delivery === d.id ? ' radio--on' : ''}`}
-                      onClick={() => { haptic.select(); setProfile({ delivery: d.id }); }}>
-                <span className="radio__mark" />
-                <span>
-                  <span className="radio__title">{d.title}</span>
-                  <span className="radio__sub">{d.sub}</span>
-                </span>
-                <span className="radio__price">{d.price ? money(d.price) : 'бесплатно'}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Контакты */}
-        <div className="block--tight col" style={{ gap: 11 }}>
-          <div className="eyebrow">Получатель</div>
-          <label className="field"><span className="field__label">Имя и фамилия</span>
-            <input className={`input${touched && errs.name ? ' input--err' : ''}`} value={profile.name}
-                   onChange={(e) => setProfile({ name: e.target.value })} placeholder="Как в документах" /></label>
-          <label className="field"><span className="field__label">Телефон</span>
-            <input className={`input${touched && errs.phone ? ' input--err' : ''}`} type="tel" value={profile.phone}
-                   onChange={(e) => setProfile({ phone: e.target.value })} placeholder="+7 900 000-00-00" /></label>
-          <label className="field"><span className="field__label">E-mail</span>
-            <input className="input" type="email" value={profile.email}
-                   onChange={(e) => setProfile({ email: e.target.value })} placeholder="для чека" /></label>
-          {profile.delivery !== 'pickup' && (
-            <label className="field"><span className="field__label">Адрес доставки</span>
-              <textarea className={`input${touched && errs.address ? ' input--err' : ''}`} rows={2} value={profile.address}
-                        onChange={(e) => setProfile({ address: e.target.value })} placeholder="Город, улица, дом, квартира" /></label>
-          )}
-          <div className="row" style={{ gap: 8, color: 'var(--muted)' }}>
-            <IcTruck size={16} /><span className="caption">Данные сохраняются в профиле и подставятся в следующий заказ</span>
-          </div>
-        </div>
-
-        {/* Итоги */}
-        <div className="block--tight">
-          <div className="hr" style={{ marginBottom: 6 }} />
-          <div className="sumrow"><span className="muted">Товары по РРЦ</span><span className="sumrow__v" style={{ textDecoration: 'line-through', color: 'var(--faint)' }}>{money(totals.rrp)}</span></div>
-          <div className="sumrow"><span className="muted">Клубная цена</span><span className="sumrow__v">{money(totals.club)}</span></div>
-          <div className="sumrow sumrow--save"><span>Выгода клуба</span><span className="sumrow__v">−{money(totals.saved)}</span></div>
-          <div className="sumrow"><span className="muted">Доставка</span><span className="sumrow__v">{ship.price ? money(ship.price) : 'бесплатно'}</span></div>
-          <div className="hr" style={{ marginTop: 8 }} />
-          <div className="sumrow sumrow--total"><span>К оплате</span><span className="sumrow__v">{money(grand)}</span></div>
-        </div>
-
-        <button className="btn btn--primary btn--block btn--lg" style={{ marginTop: 14 }} onClick={pay} disabled={busy}>
-          {busy ? 'Оплата…' : member ? `Оплатить ${money(grand)}` : 'Вступить и оплатить'}
-        </button>
-
-        {DEMO_MODE && (
-          <div className="note" style={{ marginTop: 12 }}>
-            <span className="demo-tag">демо</span>{' '}
-            Оплата имитируется. В боевом контуре — Telegram Payments и вебхук в CRM.
-          </div>
+      {/* Бесплатная доставка */}
+      <div className="ship" style={{ marginTop: 18 }}>
+        {cart.freeShipping ? (
+          <div className="t-sm" style={{ color: 'var(--ok)' }}>Доставка по Москве бесплатно</div>
+        ) : (
+          <>
+            <div className="t-sm">
+              До бесплатной доставки — <b>{money(cart.toFreeShipping)}</b>
+            </div>
+            <div className="ship__bar">
+              <div className="ship__fill" style={{ width: `${(cart.club / FREE_SHIPPING_FROM) * 100}%` }} />
+            </div>
+          </>
         )}
       </div>
-      <div style={{ height: 30 }} />
+
+      {/* Выгода */}
+      <div className="save" style={{ marginTop: 12 }}>
+        <IcCrown size={19} className="gold" />
+        <div className="grow">
+          <div className="t-micro gold">{member ? 'Экономия на этом заказе' : 'Сэкономите, вступив в клуб'}</div>
+          <div className="save__v">{money(cart.saved)}</div>
+        </div>
+      </div>
+
+      {!member && (
+        <button className="btn btn--gold btn--block" style={{ marginTop: 12 }} onClick={() => go({ k: 'join' })}>
+          Вступить за 3 000 ₽ и сэкономить {money(cart.saved)}
+        </button>
+      )}
+
+      {/* Доставка */}
+      <div className="t-label" style={{ marginTop: 28 }}>Доставка</div>
+      <div className="col" style={{ gap: 8, marginTop: 10 }}>
+        {DELIVERY.map((d) => {
+          const free = d.id !== 'pickup' && cart.freeShipping;
+          return (
+            <button key={d.id} className={`radio${option.id === d.id ? ' radio--on' : ''}`}
+                    onClick={() => { haptic.select(); setProfile({ delivery: d.id }); }}>
+              <span className="radio__m" />
+              <span>
+                <span className="radio__t">{d.title}</span>
+                <span className="radio__s">{d.sub}</span>
+              </span>
+              <span className="radio__p">
+                {d.price === 0 || free ? 'бесплатно' : money(d.price)}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Получатель */}
+      <div className="t-label" style={{ marginTop: 28 }}>Получатель</div>
+      <div className="col" style={{ gap: 12, marginTop: 10 }}>
+        <Field label="Имя и фамилия" value={profile.name} bad={touched && errs.name}
+               onChange={(v) => setProfile({ name: v })} placeholder="Как в документах" />
+        <Field label="Телефон" value={profile.phone} bad={touched && errs.phone} type="tel"
+               onChange={(v) => setProfile({ phone: v })} placeholder="+7 900 000-00-00" />
+        <Field label="E-mail" value={profile.email} type="email"
+               onChange={(v) => setProfile({ email: v })} placeholder="для чека" />
+        {option.id !== 'pickup' && (
+          <Field label="Адрес доставки" value={profile.address} bad={touched && errs.address} area
+                 onChange={(v) => setProfile({ address: v })} placeholder="Город, улица, дом, квартира" />
+        )}
+      </div>
+
+      {/* Итоги */}
+      <div style={{ marginTop: 26 }}>
+        <div className="hr" style={{ marginBottom: 6 }} />
+        <div className="sum"><span className="muted">Товары по РРЦ</span>
+          <span className="sum__v" style={{ textDecoration: 'line-through', color: 'var(--faint)' }}>{money(cart.rrp)}</span></div>
+        <div className="sum"><span className="muted">Клубная цена</span><span className="sum__v">{money(cart.club)}</span></div>
+        <div className="sum"><span className="gold">Выгода клуба</span>
+          <span className="sum__v gold">−{money(cart.saved)}</span></div>
+        <div className="sum"><span className="muted">Доставка</span>
+          <span className="sum__v">{shipping ? money(shipping) : 'бесплатно'}</span></div>
+        <div className="hr" style={{ marginTop: 8 }} />
+        <div className="sum sum--total"><span>К оплате</span><span className="sum__v">{money(grand)}</span></div>
+      </div>
+
+      <button className="btn btn--dark btn--block" style={{ marginTop: 16 }} onClick={pay} disabled={busy}>
+        {busy ? 'Оплата…' : member ? `Оплатить ${money(grand)}` : 'Вступить и оплатить'}
+      </button>
+
+      {DEMO_MODE && (
+        <div className="note" style={{ marginTop: 12 }}>
+          Демо: оплата имитируется. В боевом контуре — карта или СБП через платёжного провайдера.
+        </div>
+      )}
+      <div style={{ height: 40 }} />
     </div>
+  );
+}
+
+function Field({
+  label, value, onChange, placeholder, type = 'text', bad, area,
+}: {
+  label: string; value: string; onChange: (v: string) => void;
+  placeholder?: string; type?: string; bad?: boolean; area?: boolean;
+}) {
+  return (
+    <label className="field">
+      <span className="field__l">{label}</span>
+      {area ? (
+        <textarea className={`input${bad ? ' input--bad' : ''}`} rows={2} value={value}
+                  onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+      ) : (
+        <input className={`input${bad ? ' input--bad' : ''}`} type={type} value={value}
+               onChange={(e) => onChange(e.target.value)} placeholder={placeholder} />
+      )}
+    </label>
   );
 }

@@ -1,7 +1,7 @@
 {
   "name": "CULT — закрытый клуб BYRAIN",
   "short_name": "CULT",
-  "description": "Вся косметика BYRAIN −50% и предложения партнёров для членов клуба",
+  "description": "BYRAIN −50% и GREYMY −35% для членов закрытого клуба",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

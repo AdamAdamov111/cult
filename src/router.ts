@@ -1,26 +1,25 @@
 import { create } from 'zustand';
-import type { SectionId, Target } from './types';
 import { haptic } from './lib/telegram';
 
 export type Tab = 'home' | 'catalog' | 'cart' | 'profile';
 
 export type Route =
   | { k: 'product'; id: string }
-  | { k: 'offer'; id: string }
-  | { k: 'section'; id: SectionId }
   | { k: 'brand'; id: string }
   | { k: 'join' }
-  | { k: 'orders' }
-  | { k: 'coupons' }
-  | { k: 'checkout' };
+  | { k: 'orders' };
 
 interface Nav {
   tab: Tab;
   stacks: Record<Tab, Route[]>;
+  /** фильтр каталога, выставленный извне (с главной) */
+  pending: { cat?: string; brandId?: string } | null;
+
   go: (r: Route) => void;
   back: () => void;
   setTab: (t: Tab) => void;
-  resetTab: (t: Tab) => void;
+  openCatalog: (f: { cat?: string; brandId?: string }) => void;
+  takePending: () => { cat?: string; brandId?: string } | null;
   depth: () => number;
   top: () => Route | null;
 }
@@ -28,13 +27,13 @@ interface Nav {
 export const useNav = create<Nav>((set, get) => ({
   tab: 'home',
   stacks: { home: [], catalog: [], cart: [], profile: [] },
+  pending: null,
 
   go: (r) => {
     haptic.tap();
     const { tab, stacks } = get();
     const cur = stacks[tab];
     const last = cur[cur.length - 1];
-    // не пушим тот же экран дважды
     if (last && last.k === r.k && (last as any).id === (r as any).id) return;
     set({ stacks: { ...stacks, [tab]: [...cur, r] } });
     window.scrollTo(0, 0);
@@ -50,7 +49,6 @@ export const useNav = create<Nav>((set, get) => ({
   setTab: (t) => {
     const { tab, stacks } = get();
     if (t === tab) {
-      // повторный тап по активной вкладке — наверх стека и к началу списка
       if (stacks[t].length) set({ stacks: { ...stacks, [t]: [] } });
       window.scrollTo({ top: 0, behavior: 'smooth' });
       haptic.tap();
@@ -61,7 +59,17 @@ export const useNav = create<Nav>((set, get) => ({
     window.scrollTo(0, 0);
   },
 
-  resetTab: (t) => set({ tab: t, stacks: { ...get().stacks, [t]: [] } }),
+  openCatalog: (f) => {
+    haptic.tap();
+    set({ tab: 'catalog', pending: f, stacks: { ...get().stacks, catalog: [] } });
+    window.scrollTo(0, 0);
+  },
+
+  takePending: () => {
+    const p = get().pending;
+    if (p) set({ pending: null });
+    return p;
+  },
 
   depth: () => get().stacks[get().tab].length,
   top: () => {
@@ -69,16 +77,3 @@ export const useNav = create<Nav>((set, get) => ({
     return s.length ? s[s.length - 1] : null;
   },
 }));
-
-/** Единая точка перехода по «цели» баннера или сторис. */
-export function goTarget(t: Target) {
-  const { go } = useNav.getState();
-  switch (t.t) {
-    case 'product': return go({ k: 'product', id: t.id });
-    case 'offer':   return go({ k: 'offer', id: t.id });
-    case 'brand':   return go({ k: 'brand', id: t.id });
-    case 'section': return go({ k: 'section', id: t.id });
-    case 'join':    return go({ k: 'join' });
-    case 'external': window.open(t.url, '_blank', 'noopener'); return;
-  }
-}

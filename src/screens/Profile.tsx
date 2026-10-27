@@ -1,33 +1,32 @@
 import { useState } from 'react';
-import { Empty, Sheet, money } from '../components/Primitives';
-import { IcCheck, IcCrown, IcRight, IcSupport, IcTicket, IcUpRight, IcUser } from '../components/Icons';
-import { MEMBERSHIP_PRICE } from '../data/sections';
-import { useApp } from '../store';
+import { IcCheck, IcCrown, IcRight, IcSupport, IcUpRight } from '../components/Icons';
+import { Empty, Sheet } from '../components/ui';
+import { confirmMsg, haptic, openExternal } from '../lib/telegram';
+import { money, useShop } from '../store';
 import { useNav } from '../router';
-import { confirmMsg, haptic, openExternal, tgUser } from '../lib/telegram';
+import { MEMBERSHIP_PRICE } from '../data/catalog';
 
-const SUPPORT_URL = 'https://t.me/byrain_support';
+const SUPPORT = 'https://t.me/byrain_support';
 
 export function Profile() {
-  const member = useApp((s) => s.isMember());
-  const until = useApp((s) => s.memberUntil);
-  const autoRenew = useApp((s) => s.autoRenew);
-  const cancelRenew = useApp((s) => s.cancelRenew);
-  const profile = useApp((s) => s.profile);
-  const setProfile = useApp((s) => s.setProfile);
-  const orders = useApp((s) => s.orders);
-  const coupons = useApp((s) => s.coupons);
-  const savedTotal = useApp((s) => s.savedTotal);
-  const favs = useApp((s) => s.favs);
+  const member = useShop((s) => s.isMember());
+  const until = useShop((s) => s.memberUntil);
+  const autoRenew = useShop((s) => s.autoRenew);
+  const cancelRenew = useShop((s) => s.cancelRenew);
+  const profile = useShop((s) => s.profile);
+  const setProfile = useShop((s) => s.setProfile);
+  const orders = useShop((s) => s.orders);
+  const favs = useShop((s) => s.favs);
+  const savedTotal = useShop((s) => s.savedTotal);
+  const reset = useShop((s) => s.reset);
   const go = useNav((n) => n.go);
+
   const [edit, setEdit] = useState(false);
   const [draft, setDraft] = useState(profile);
 
-  const tgu = tgUser();
-  const untilTxt = until ? new Date(until).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' }) : '';
-
-  const openEdit = () => { setDraft(profile); setEdit(true); haptic.tap(); };
-  const save = () => { setProfile(draft); setEdit(false); haptic.ok(); };
+  const untilTxt = until
+    ? new Date(until).toLocaleDateString('ru-RU', { day: 'numeric', month: 'long', year: 'numeric' })
+    : '';
 
   const doCancel = async () => {
     if (await confirmMsg('Отключить автопродление? Клубные цены будут действовать до конца оплаченного периода.')) {
@@ -36,202 +35,151 @@ export function Profile() {
   };
 
   return (
-    <div className="screen screen--root">
-      {/* Пользователь */}
-      <div className="pad" style={{ paddingTop: 16 }}>
-        <div className="row" style={{ gap: 13 }}>
-          <div style={{ width: 52, height: 52, borderRadius: '50%', overflow: 'hidden', background: 'var(--surface-3)', display: 'grid', placeItems: 'center', flex: '0 0 auto' }}>
-            {tgu?.photo ? <img src={tgu.photo} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <IcUser size={26} className="muted" />}
-          </div>
-          <div style={{ minWidth: 0 }}>
-            <div className="h2 clamp1">{profile.name || tgu?.name || 'Гость клуба'}</div>
-            <div className="caption">{tgu?.username ? '@' + tgu.username : member ? 'Член клуба CULT' : 'Без членства'}</div>
-          </div>
-        </div>
-      </div>
-
+    <div className="screen pad" style={{ paddingTop: 16 }}>
       {/* Членство */}
-      <div className="pad block--tight">
-        {member ? (
-          <div className="memcard">
-            <div className="memcard__glow" />
-            <div className="memcard__mark">Cult</div>
-            <div className="memcard__st">Членство активно</div>
-            <div className="memcard__until">
-              {autoRenew ? `Следующее списание ${money(MEMBERSHIP_PRICE)} — ${untilTxt}` : `Действует до ${untilTxt}, автопродление отключено`}
-            </div>
-            <div className="micro" style={{ position: 'relative', marginTop: 15, color: 'rgba(255,255,255,.6)' }}>Сэкономлено в клубе</div>
-            <div className="memcard__saved">{money(savedTotal)}</div>
-            {autoRenew && (
-              <button className="btn btn--sm" style={{ marginTop: 15, background: 'rgba(255,255,255,.12)', color: '#fff', position: 'relative' }}
-                      onClick={doCancel}>
-                Отключить автопродление
-              </button>
-            )}
+      {member ? (
+        <div className="memcard">
+          <div className="memcard__glow" />
+          <div className="memcard__m">Cult</div>
+          <div className="memcard__s">Членство активно</div>
+          <div style={{ position: 'relative', fontSize: 13, opacity: .78, marginTop: 16 }}>
+            {autoRenew
+              ? `Следующее списание ${money(MEMBERSHIP_PRICE)} — ${untilTxt}`
+              : `Действует до ${untilTxt}, автопродление отключено`}
           </div>
-        ) : (
-          <button className="memcard" style={{ width: '100%', textAlign: 'left' }} onClick={() => go({ k: 'join' })}>
-            <div className="memcard__glow" />
-            <div className="memcard__mark">Cult</div>
-            <div className="memcard__st">Членства нет</div>
-            <div className="memcard__until">Вся косметика BYRAIN −50% и предложения партнёров — за {money(MEMBERSHIP_PRICE)} в месяц</div>
-            <span className="btn btn--sm btn--gold" style={{ marginTop: 15, position: 'relative' }}>
-              <IcCrown size={15} />Вступить в CULT
-            </span>
-          </button>
-        )}
-      </div>
+          <div style={{ position: 'relative', fontSize: 11, opacity: .6, marginTop: 16 }}>Сэкономлено в клубе</div>
+          <div style={{ position: 'relative', fontSize: 25, fontWeight: 700, letterSpacing: '-.03em' }} className="num">
+            {money(savedTotal)}
+          </div>
+          {autoRenew && (
+            <button className="btn btn--sm" style={{ marginTop: 16, background: 'rgba(255,255,255,.12)', color: '#fff', position: 'relative' }}
+                    onClick={doCancel}>
+              Отключить автопродление
+            </button>
+          )}
+        </div>
+      ) : (
+        <button className="memcard" style={{ width: '100%', textAlign: 'left' }} onClick={() => go({ k: 'join' })}>
+          <div className="memcard__glow" />
+          <div className="memcard__m">Cult</div>
+          <div className="memcard__s">Членства нет</div>
+          <div style={{ position: 'relative', fontSize: 13, opacity: .78, marginTop: 16 }}>
+            BYRAIN −50% и GREYMY −35% за {money(MEMBERSHIP_PRICE)} в месяц
+          </div>
+          <span className="btn btn--sm btn--gold" style={{ marginTop: 16, position: 'relative' }}>
+            <IcCrown size={15} />Вступить в CULT
+          </span>
+        </button>
+      )}
 
       {/* Контакты */}
-      <div className="pad block--tight">
-        <div className="eyebrow" style={{ marginBottom: 9 }}>Контакты и доставка</div>
-        <div className="plist">
-          <button className="prow" onClick={openEdit}>
-            <span className="prow__l">Имя</span><span className="prow__v">{profile.name || 'не указано'}</span><IcRight size={16} className="prow__chev" />
+      <div className="t-label" style={{ marginTop: 28 }}>Контакты и доставка</div>
+      <div className="list" style={{ marginTop: 10 }}>
+        {([
+          ['Имя', profile.name || 'не указано'],
+          ['Телефон', profile.phone || 'не указан'],
+          ['E-mail', profile.email || 'не указан'],
+          ['Адрес', profile.address || 'не указан'],
+        ] as const).map(([l, v]) => (
+          <button className="lrow" key={l} onClick={() => { setDraft(profile); setEdit(true); haptic.tap(); }}>
+            <span className="lrow__l">{l}</span>
+            <span className="lrow__v clamp1">{v}</span>
+            <IcRight size={15} className="faint" />
           </button>
-          <button className="prow" onClick={openEdit}>
-            <span className="prow__l">Телефон</span><span className="prow__v">{profile.phone || 'не указан'}</span><IcRight size={16} className="prow__chev" />
-          </button>
-          <button className="prow" onClick={openEdit}>
-            <span className="prow__l">E-mail</span><span className="prow__v clamp1">{profile.email || 'не указан'}</span><IcRight size={16} className="prow__chev" />
-          </button>
-          <button className="prow" onClick={openEdit}>
-            <span className="prow__l">Адрес</span><span className="prow__v clamp1">{profile.address || 'не указан'}</span><IcRight size={16} className="prow__chev" />
-          </button>
-        </div>
+        ))}
       </div>
 
-      {/* Разделы профиля */}
-      <div className="pad block--tight">
-        <div className="plist">
-          <button className="prow" onClick={() => go({ k: 'orders' })}>
-            <span className="prow__l">История заказов</span><span className="prow__v num">{orders.length}</span><IcRight size={16} className="prow__chev" />
-          </button>
-          <button className="prow" onClick={() => go({ k: 'coupons' })}>
-            <span className="prow__l">Промокоды и купоны</span><span className="prow__v num">{coupons.length}</span><IcRight size={16} className="prow__chev" />
-          </button>
-          <div className="prow">
-            <span className="prow__l">Избранное</span><span className="prow__v num">{favs.length}</span>
-          </div>
-          <button className="prow" onClick={() => { haptic.tap(); openExternal(SUPPORT_URL); }}>
-            <IcSupport size={17} className="muted" /><span className="prow__l">Поддержка клуба</span><IcUpRight size={15} className="prow__chev" />
-          </button>
+      {/* Разделы */}
+      <div className="list" style={{ marginTop: 20 }}>
+        <button className="lrow" onClick={() => go({ k: 'orders' })}>
+          <span className="lrow__l">История заказов</span>
+          <span className="lrow__v num">{orders.length}</span>
+          <IcRight size={15} className="faint" />
+        </button>
+        <div className="lrow">
+          <span className="lrow__l">Избранное</span>
+          <span className="lrow__v num">{favs.length}</span>
         </div>
+        <button className="lrow" onClick={() => { haptic.tap(); openExternal(SUPPORT); }}>
+          <IcSupport size={17} className="muted" />
+          <span className="lrow__l">Поддержка клуба</span>
+          <IcUpRight size={14} className="faint" />
+        </button>
       </div>
 
-      <div className="pad block--tight">
-        <div className="note">
-          Клубные цены действуют, пока активно членство. Заказы и промокоды привязаны к вашему Telegram-аккаунту.
-        </div>
+      <div className="note" style={{ marginTop: 20 }}>
+        Клубные цены действуют, пока активно членство. Заказы хранятся на этом устройстве.
       </div>
-      <div style={{ height: 30 }} />
 
-      {/* Редактирование контактов */}
+      <button className="t-cap" style={{ display: 'block', margin: '24px auto 0', color: 'var(--faint)' }}
+              onClick={reset}>
+        Сбросить демо-состояние
+      </button>
+      <div className="t-micro" style={{ textAlign: 'center', marginTop: 8 }}>CULT · закрытый клуб BYRAIN</div>
+      <div style={{ height: 36 }} />
+
       <Sheet open={edit} onClose={() => setEdit(false)} title="Контакты">
-        <div className="col" style={{ gap: 11, paddingTop: 8 }}>
-          <label className="field"><span className="field__label">Имя и фамилия</span>
+        <div className="col" style={{ gap: 12, paddingTop: 10 }}>
+          <label className="field"><span className="field__l">Имя и фамилия</span>
             <input className="input" value={draft.name} onChange={(e) => setDraft({ ...draft, name: e.target.value })} /></label>
-          <label className="field"><span className="field__label">Телефон</span>
-            <input className="input" type="tel" value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} placeholder="+7 900 000-00-00" /></label>
-          <label className="field"><span className="field__label">E-mail</span>
+          <label className="field"><span className="field__l">Телефон</span>
+            <input className="input" type="tel" value={draft.phone} onChange={(e) => setDraft({ ...draft, phone: e.target.value })} /></label>
+          <label className="field"><span className="field__l">E-mail</span>
             <input className="input" type="email" value={draft.email} onChange={(e) => setDraft({ ...draft, email: e.target.value })} /></label>
-          <label className="field"><span className="field__label">Адрес доставки</span>
+          <label className="field"><span className="field__l">Адрес доставки</span>
             <textarea className="input" rows={2} value={draft.address} onChange={(e) => setDraft({ ...draft, address: e.target.value })} /></label>
-          <button className="btn btn--primary btn--block btn--lg" onClick={save}><IcCheck size={17} />Сохранить</button>
+          <button className="btn btn--dark btn--block" onClick={() => { setProfile(draft); setEdit(false); haptic.ok(); }}>
+            <IcCheck size={17} />Сохранить
+          </button>
         </div>
       </Sheet>
     </div>
   );
 }
 
-/* ======================= История заказов ======================= */
 export function Orders() {
-  const orders = useApp((s) => s.orders);
+  const orders = useShop((s) => s.orders);
   const setTab = useNav((n) => n.setTab);
+
   if (!orders.length) {
     return (
-      <div className="screen">
-        <Empty title="Заказов пока нет" text="Оформленные заказы появятся здесь с составом и статусом."
-               action={<button className="btn btn--primary" onClick={() => setTab('catalog')}>В каталог</button>} />
-      </div>
+      <Empty title="Заказов пока нет" text="Оформленные заказы появятся здесь с составом и статусом."
+             action={<button className="btn btn--dark" onClick={() => setTab('catalog')}>В каталог</button>} />
     );
   }
-  return (
-    <div className="screen">
-      <div className="pad" style={{ paddingTop: 14 }}>
-        <h1 className="h1">История заказов</h1>
-        <div style={{ marginTop: 14 }}>
-          {orders.map((o) => (
-            <div className="order" key={o.id}>
-              <div className="row--between">
-                <span className="h3">№ {o.id}</span>
-                <span className="order__st order__st--ok">{o.status}</span>
-              </div>
-              <div className="caption" style={{ marginTop: 3 }}>
-                {new Date(o.ts).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
-              </div>
-              <div className="col" style={{ gap: 4, marginTop: 10 }}>
-                {o.lines.map((l, i) => (
-                  <div className="row--between" key={i}>
-                    <span className="caption clamp1" style={{ flex: 1, color: 'var(--ink-2)' }}>{l.title}</span>
-                    <span className="caption num">{l.qty} × {money(l.price)}</span>
-                  </div>
-                ))}
-              </div>
-              <div className="hr" style={{ margin: '11px 0 8px' }} />
-              <div className="row--between">
-                <span className="small">Итого</span>
-                <span className="h3 num">{money(o.total)}</span>
-              </div>
-              <div className="row--between" style={{ marginTop: 2 }}>
-                <span className="micro gold">Выгода клуба</span>
-                <span className="micro gold num">−{money(o.saved)}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div style={{ height: 30 }} />
-    </div>
-  );
-}
 
-/* ======================= Купоны ======================= */
-export function Coupons() {
-  const coupons = useApp((s) => s.coupons);
-  const say = useApp((s) => s.say);
-  const go = useNav((n) => n.go);
-  if (!coupons.length) {
-    return (
-      <div className="screen">
-        <Empty icon={<IcTicket size={56} />} title="Купонов пока нет"
-               text="Откройте предложение партнёра и нажмите «Получить предложение» — промокод появится здесь." />
-      </div>
-    );
-  }
   return (
-    <div className="screen">
-      <div className="pad" style={{ paddingTop: 14 }}>
-        <h1 className="h1">Промокоды и купоны</h1>
-        <div className="col" style={{ gap: 10, marginTop: 14 }}>
-          {coupons.map((c) => (
-            <div className="coupon-mini" key={c.code}>
-              <IcTicket size={19} className="gold" />
-              <div style={{ flex: 1, minWidth: 0 }}>
-                <div className="micro">{c.brand} · {c.deal}</div>
-                <div className="coupon-mini__code">{c.code}</div>
-                <div className="micro clamp1">{c.title}</div>
-                <div className="micro faint">до {new Date(c.expires).toLocaleDateString('ru-RU')}</div>
-              </div>
-              <div className="col" style={{ gap: 6 }}>
-                <button className="btn btn--sm btn--ghost" onClick={() => { navigator.clipboard?.writeText(c.code); haptic.ok(); say('Скопировано'); }}>Копировать</button>
-                <button className="btn btn--sm btn--outline" onClick={() => go({ k: 'offer', id: c.offerId })}>Открыть</button>
-              </div>
+    <div className="screen pad" style={{ paddingTop: 16 }}>
+      <h1 className="t-h1">История заказов</h1>
+      <div className="col" style={{ gap: 10, marginTop: 16 }}>
+        {orders.map((o) => (
+          <div className="order" key={o.id}>
+            <div className="between">
+              <span className="t-h3">№ {o.id}</span>
+              <span className="order__st">{o.status}</span>
             </div>
-          ))}
-        </div>
+            <div className="t-cap" style={{ marginTop: 3 }}>
+              {new Date(o.ts).toLocaleString('ru-RU', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })}
+            </div>
+            <div className="col" style={{ gap: 5, marginTop: 12 }}>
+              {o.lines.map((l, i) => (
+                <div className="between" key={i}>
+                  <span className="t-cap clamp1 grow" style={{ color: 'var(--ink-2)' }}>{l.title}</span>
+                  <span className="t-cap num">{l.qty} × {money(l.price)}</span>
+                </div>
+              ))}
+            </div>
+            <div className="hr" style={{ margin: '12px 0 9px' }} />
+            <div className="between"><span className="t-sm">Итого</span>
+              <span className="t-h3 num">{money(o.total)}</span></div>
+            <div className="between" style={{ marginTop: 2 }}>
+              <span className="t-micro gold">Выгода клуба</span>
+              <span className="t-micro gold num">−{money(o.saved)}</span>
+            </div>
+          </div>
+        ))}
       </div>
-      <div style={{ height: 30 }} />
+      <div style={{ height: 36 }} />
     </div>
   );
 }

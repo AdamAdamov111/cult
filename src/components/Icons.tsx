@@ -40,3 +40,7 @@ export const IcDumbbell= (p: P) => <S {...p} d="M4 9v6M7 7.5v9M17 7.5v9M20 9v6M7
 export const IcPlane   = (p: P) => <S {...p} d="M3.5 13.2 21 4l-7.3 16.5-2.2-6.3z" />;
 export const IcFlask   = (p: P) => <S {...p} d="M9 3h6M10.5 3v6.5L5.8 18a1.4 1.4 0 0 0 1.2 2.1h10a1.4 1.4 0 0 0 1.2-2.1l-4.7-8.5V3M7.5 14h9" />;
 export const IcDrop    = (p: P) => <S {...p} d="M12 3.5c3 3.8 5.5 6.6 5.5 10a5.5 5.5 0 1 1-11 0c0-3.4 2.5-6.2 5.5-10" />;
+export const IcSliders = (p: P) => <S {...p} d="M4 7h10M18 7h2M4 17h4M12 17h8M14 4.5v5M8 14.5v5" />;
+export const IcBagPlus = (p: P) => <S {...p} d="M6 8h12l1 12.5a.8.8 0 0 1-.8.9H5.8a.8.8 0 0 1-.8-.9zM9 8V6a3 3 0 0 1 6 0v2M12 12v6M9 15h6" />;
+export const IcLeaf   = (p: P) => <S {...p} d="M20 4c0 8-5 13-12 13H5c0-8 5-13 12-13zM5 20c1.5-4 4-6.5 7-8" />;
+export const IcReturn = (p: P) => <S {...p} d="M4 9h11a5 5 0 0 1 0 10h-5M4 9l4-4M4 9l4 4" />;

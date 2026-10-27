@@ -1,226 +1,213 @@
 import { useMemo } from 'react';
 import { create } from 'zustand';
-import type { CartLine, Coupon, Order, Profile } from './types';
-import { PRODUCT_MAP } from './data/products';
-import { OFFER_MAP } from './data/offers';
-import { MEMBERSHIP_PRICE } from './data/sections';
-import { storage, haptic, tgUser } from './lib/telegram';
-import { fetchMe } from './lib/payments';
+import { product, FREE_SHIPPING_FROM, SHIPPING_COST } from './data/catalog';
+import { storage, haptic } from './lib/telegram';
 
-const KEY = 'cult.state.v1';
+const KEY = 'cult.shop.v1';
 const MONTH = 30 * 24 * 3600 * 1000;
+
+export interface Profile {
+  name: string; phone: string; email: string; address: string;
+  delivery: 'courier' | 'cdek' | 'pickup';
+}
+
+export interface OrderLine { title: string; qty: number; price: number }
+export interface Order {
+  id: string; ts: number; lines: OrderLine[];
+  shipping: number; total: number; saved: number; status: string;
+}
 
 interface Persisted {
   memberUntil: number | null;
   autoRenew: boolean;
-  cart: CartLine[];
-  profile: Profile;
-  coupons: Coupon[];
-  orders: Order[];
-  viewed: string[];
+  cart: Record<string, number>;
   favs: string[];
+  profile: Profile;
+  orders: Order[];
   savedTotal: number;
 }
 
-interface AppState extends Persisted {
-  hydrated: boolean;
-  toast: string | null;
-
-  isMember: () => boolean;
-  /* корзина */
-  qtyOf: (id: string) => number;
-  cartCount: () => number;
-  cartTotals: () => { club: number; rrp: number; saved: number };
-  add: (id: string, qty?: number) => void;
-  setQty: (id: string, qty: number) => void;
-  removeLine: (id: string) => void;
-  clearCart: () => void;
-  /* клуб */
-  join: () => void;
-  cancelRenew: () => void;
-  /* купоны */
-  couponFor: (offerId: string) => Coupon | undefined;
-  issueCoupon: (offerId: string) => Coupon;
-  /* заказы */
-  placeOrder: (shipping: number) => Order;
-  /* прочее */
-  setProfile: (p: Partial<Profile>) => void;
-  markViewed: (id: string) => void;
-  toggleFav: (id: string) => void;
-  say: (m: string) => void;
-  hydrate: () => Promise<void>;
-  syncMembership: () => Promise<void>;
-}
-
 const emptyProfile: Profile = {
-  name: tgUser()?.name || '', phone: '', email: '', address: '', delivery: 'courier',
+  name: '', phone: '', email: '', address: '', delivery: 'courier',
 };
 
 const defaults: Persisted = {
-  memberUntil: null, autoRenew: true, cart: [], profile: emptyProfile,
-  coupons: [], orders: [], viewed: [], favs: [], savedTotal: 0,
+  memberUntil: null, autoRenew: true, cart: {}, favs: [],
+  profile: emptyProfile, orders: [], savedTotal: 0,
 };
 
-let saveTimer: number | undefined;
+interface Shop extends Persisted {
+  hydrated: boolean;
+  toast: string | null;
+  justAdded: string | null;     // товар, по которому открыта шторка корзины
 
-export const useApp = create<AppState>((set, get) => {
-  /** Пишем состояние в CloudStorage с дебаунсом. */
+  isMember: () => boolean;
+  cartCount: () => number;
+  qtyOf: (id: string) => number;
+
+  add: (id: string, qty?: number, silent?: boolean) => void;
+  setQty: (id: string, qty: number) => void;
+  remove: (id: string) => void;
+  clearCart: () => void;
+  closeAdded: () => void;
+
+  toggleFav: (id: string) => void;
+  isFav: (id: string) => boolean;
+
+  join: (months?: number) => void;
+  cancelRenew: () => void;
+
+  setProfile: (p: Partial<Profile>) => void;
+  placeOrder: (shipping: number) => Order;
+
+  say: (m: string) => void;
+  hydrate: () => Promise<void>;
+  reset: () => void;
+}
+
+let saveTimer: number | undefined;
+let toastTimer: number | undefined;
+
+export const useShop = create<Shop>((set, get) => {
   const persist = () => {
     clearTimeout(saveTimer);
     saveTimer = setTimeout(() => {
       const s = get();
       const data: Persisted = {
-        memberUntil: s.memberUntil, autoRenew: s.autoRenew, cart: s.cart, profile: s.profile,
-        coupons: s.coupons, orders: s.orders, viewed: s.viewed, favs: s.favs, savedTotal: s.savedTotal,
+        memberUntil: s.memberUntil, autoRenew: s.autoRenew, cart: s.cart,
+        favs: s.favs, profile: s.profile, orders: s.orders, savedTotal: s.savedTotal,
       };
       storage.set(KEY, JSON.stringify(data));
-    }, 400) as unknown as number;
+    }, 350) as unknown as number;
   };
-  const patch = (p: Partial<AppState>) => { set(p); persist(); };
+  const patch = (p: Partial<Shop>) => { set(p); persist(); };
 
   return {
     ...defaults,
     hydrated: false,
     toast: null,
+    justAdded: null,
 
     isMember: () => {
       const u = get().memberUntil;
       return !!u && u > Date.now();
     },
 
-    qtyOf: (id) => get().cart.find((l) => l.id === id)?.qty ?? 0,
-    cartCount: () => get().cart.reduce((s, l) => s + l.qty, 0),
+    cartCount: () => Object.values(get().cart).reduce((s, n) => s + n, 0),
+    qtyOf: (id) => get().cart[id] ?? 0,
 
-    cartTotals: () => {
-      let club = 0, rrp = 0;
-      for (const l of get().cart) {
-        const p = PRODUCT_MAP.get(l.id);
-        if (!p) continue;
-        club += p.club * l.qty;
-        rrp += p.rrp * l.qty;
-      }
-      return { club, rrp, saved: rrp - club };
-    },
-
-    add: (id, qty = 1) => {
-      const cart = [...get().cart];
-      const i = cart.findIndex((l) => l.id === id);
-      if (i >= 0) cart[i] = { ...cart[i], qty: Math.min(99, cart[i].qty + qty) };
-      else cart.push({ id, qty });
+    add: (id, qty = 1, silent = false) => {
+      const cart = { ...get().cart };
+      cart[id] = Math.min(99, (cart[id] ?? 0) + qty);
       haptic.ok();
-      patch({ cart, toast: 'Добавлено в корзину' });
-      setTimeout(() => set({ toast: null }), 1900);
+      patch({ cart, justAdded: silent ? null : id });
     },
 
     setQty: (id, qty) => {
       haptic.select();
-      if (qty <= 0) { get().removeLine(id); return; }
-      patch({ cart: get().cart.map((l) => (l.id === id ? { ...l, qty: Math.min(99, qty) } : l)) });
+      const cart = { ...get().cart };
+      if (qty <= 0) delete cart[id]; else cart[id] = Math.min(99, qty);
+      patch({ cart });
     },
 
-    removeLine: (id) => { haptic.tap(); patch({ cart: get().cart.filter((l) => l.id !== id) }); },
-    clearCart: () => patch({ cart: [] }),
-
-    join: () => {
-      haptic.ok();
-      const base = get().isMember() ? get().memberUntil! : Date.now();
-      patch({ memberUntil: base + MONTH, autoRenew: true, toast: 'Добро пожаловать в CULT' });
-      setTimeout(() => set({ toast: null }), 2200);
+    remove: (id) => {
+      haptic.tap();
+      const cart = { ...get().cart };
+      delete cart[id];
+      patch({ cart });
     },
 
-    cancelRenew: () => patch({ autoRenew: false, toast: 'Автопродление отключено' }),
-
-    couponFor: (offerId) => get().coupons.find((c) => c.offerId === offerId && c.expires > Date.now()),
-
-    issueCoupon: (offerId) => {
-      const existing = get().couponFor(offerId);
-      if (existing) return existing;
-      const o = OFFER_MAP.get(offerId)!;
-      const code = 'CULT-' + Math.random().toString(36).slice(2, 7).toUpperCase() + '-' + String(Date.now()).slice(-3);
-      const c: Coupon = {
-        code, offerId, brand: o.brand, title: o.title, deal: o.deal,
-        issued: Date.now(), expires: Date.now() + 14 * 24 * 3600 * 1000,
-      };
-      haptic.ok();
-      patch({ coupons: [c, ...get().coupons] });
-      return c;
-    },
-
-    placeOrder: (shipping) => {
-      const s = get();
-      const t = s.cartTotals();
-      const order: Order = {
-        id: 'C' + String(Date.now()).slice(-7),
-        ts: Date.now(),
-        lines: s.cart.map((l) => {
-          const p = PRODUCT_MAP.get(l.id)!;
-          return { title: p.title, qty: l.qty, price: p.club };
-        }),
-        shipping, total: t.club + shipping, saved: t.saved, status: 'Оплачен',
-      };
-      haptic.ok();
-      patch({ orders: [order, ...s.orders], cart: [], savedTotal: s.savedTotal + t.saved });
-      return order;
-    },
-
-    setProfile: (p) => patch({ profile: { ...get().profile, ...p } }),
-
-    markViewed: (id) => {
-      if (get().viewed.includes(id)) return;
-      patch({ viewed: [...get().viewed, id] });
-    },
+    clearCart: () => patch({ cart: {} }),
+    closeAdded: () => set({ justAdded: null }),
 
     toggleFav: (id) => {
       haptic.tap();
       const favs = get().favs;
       patch({ favs: favs.includes(id) ? favs.filter((f) => f !== id) : [...favs, id] });
     },
+    isFav: (id) => get().favs.includes(id),
 
-    say: (m) => { set({ toast: m }); setTimeout(() => set({ toast: null }), 1900); },
+    join: (months = 1) => {
+      haptic.ok();
+      const base = get().isMember() ? get().memberUntil! : Date.now();
+      patch({ memberUntil: base + MONTH * months, autoRenew: true });
+      get().say('Добро пожаловать в CULT');
+    },
 
-    /** Подтянуть членство с сервера: клиентское состояние — лишь кэш. */
-    syncMembership: async () => {
-      const me = await fetchMe();
-      if (!me) return;
-      patch({ memberUntil: me.until, autoRenew: me.autoRenew });
+    cancelRenew: () => { patch({ autoRenew: false }); get().say('Автопродление отключено'); },
+
+    setProfile: (p) => patch({ profile: { ...get().profile, ...p } }),
+
+    placeOrder: (shipping) => {
+      const s = get();
+      const lines: OrderLine[] = [];
+      let club = 0, rrp = 0;
+      for (const [id, qty] of Object.entries(s.cart)) {
+        const p = product(id);
+        if (!p) continue;
+        lines.push({ title: p.title, qty, price: p.club });
+        club += p.club * qty;
+        rrp += p.rrp * qty;
+      }
+      const order: Order = {
+        id: 'C' + String(Date.now()).slice(-7),
+        ts: Date.now(), lines, shipping,
+        total: club + shipping, saved: rrp - club, status: 'Оплачен',
+      };
+      haptic.ok();
+      patch({ orders: [order, ...s.orders], cart: {}, savedTotal: s.savedTotal + (rrp - club) });
+      return order;
+    },
+
+    say: (m) => {
+      clearTimeout(toastTimer);
+      set({ toast: m });
+      toastTimer = setTimeout(() => set({ toast: null }), 1900) as unknown as number;
     },
 
     hydrate: async () => {
-      const txt = await Promise.race([storage.get(KEY), new Promise<null>((r) => setTimeout(() => r(null), 2000))]);
+      const txt = await Promise.race([
+        storage.get(KEY),
+        new Promise<null>((r) => setTimeout(() => r(null), 2000)),
+      ]);
       if (txt) {
         try {
           const d = JSON.parse(txt) as Partial<Persisted>;
-          set({
-            ...defaults, ...d,
-            profile: { ...emptyProfile, ...(d.profile || {}) },
-            hydrated: true,
-          });
-          get().syncMembership();
+          set({ ...defaults, ...d, profile: { ...emptyProfile, ...(d.profile || {}) }, hydrated: true });
           return;
         } catch { /* битое состояние — стартуем чисто */ }
       }
       set({ hydrated: true });
-      get().syncMembership();
     },
+
+    reset: () => { patch({ ...defaults }); get().say('Состояние сброшено'); },
   };
 });
 
-export const MEMBERSHIP = MEMBERSHIP_PRICE;
-
-/**
- * Итоги корзины. Отдельным хуком, а не селектором: селектор, который
- * возвращает новый объект на каждый вызов, вводит zustand в бесконечный рендер.
- */
-export function useCartTotals() {
-  const cart = useApp((s) => s.cart);
+/** Итоги корзины. Отдельным хуком: селектор с новым объектом зациклил бы рендер. */
+export function useCart() {
+  const cart = useShop((s) => s.cart);
   return useMemo(() => {
-    let club = 0, rrp = 0;
-    for (const l of cart) {
-      const p = PRODUCT_MAP.get(l.id);
-      if (!p) continue;
-      club += p.club * l.qty;
-      rrp += p.rrp * l.qty;
-    }
-    return { club, rrp, saved: rrp - club };
+    const lines = Object.entries(cart)
+      .map(([id, qty]) => ({ product: product(id)!, qty }))
+      .filter((l) => l.product);
+    const club = lines.reduce((s, l) => s + l.product.club * l.qty, 0);
+    const rrp = lines.reduce((s, l) => s + l.product.rrp * l.qty, 0);
+    const freeShipping = club >= FREE_SHIPPING_FROM;
+    return {
+      lines, club, rrp, saved: rrp - club, freeShipping,
+      toFreeShipping: Math.max(0, FREE_SHIPPING_FROM - club),
+      shipping: freeShipping ? 0 : SHIPPING_COST,
+    };
   }, [cart]);
+}
+
+export const money = (n: number) => n.toLocaleString('ru-RU') + ' ₽';
+
+/** Склонение: plural(1,'товар','товара','товаров') → «товар». */
+export function plural(n: number, one: string, few: string, many: string): string {
+  const mod10 = n % 10, mod100 = n % 100;
+  if (mod10 === 1 && mod100 !== 11) return one;
+  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 10 || mod100 >= 20)) return few;
+  return many;
 }

@@ -1,45 +1,46 @@
-/* CULT — дизайн-токены. База монохром по брендбуку BYRAIN + клубное золото. */
+/* CULT — токены. Монохром брендбука BYRAIN, золото только как клубный акцент. */
 :root {
   color-scheme: light;
 
-  --bg:         #ffffff;
-  --bg-sunken:  #f6f5f3;
-  --surface:    #ffffff;
-  --surface-2:  #fafafa;
-  --surface-3:  #f1f0ee;
+  --bg:        #ffffff;
+  --sunken:    #f7f6f4;
+  --surface:   #ffffff;
+  --surface-2: #faf9f8;
+  --surface-3: #f1efec;
+  --packshot:  #f6f5f3;   /* подложка под фото товара */
 
-  --ink:        #0a0a0a;
-  --ink-2:      #2c2c2c;
-  --muted:      #6d6d6d;
-  --faint:      #9b9b9b;
+  --ink:   #0a0a0a;
+  --ink-2: #333231;
+  --muted: #6b6966;
+  --faint: #a3a09c;
 
-  --line:       #e7e7e7;
-  --line-soft:  #f0efed;
+  --line:      #e8e6e3;
+  --line-soft: #f2f0ed;
 
-  --gold:       #c6a664;
-  --gold-ink:   #8c6e32;
-  --gold-wash:  #faf6ec;
-  --sale:       #e8503a;
-  --ok:         #2e7d5b;
+  --gold:      #b3914f;
+  --gold-ink:  #8a6d2f;
+  --gold-wash: #faf6ed;
 
-  --on-ink:     #ffffff;
-  --scrim:      rgba(10, 10, 10, .52);
-  --blur-bg:    rgba(255, 255, 255, .82);
+  --sale: #c8402c;
+  --ok:   #2f7a57;
 
-  --r-xs: 6px;
-  --r-sm: 10px;
-  --r:    14px;
-  --r-lg: 20px;
+  --on-ink: #ffffff;
+  --scrim:  rgba(10, 10, 10, .46);
+  --veil:   rgba(255, 255, 255, .86);
+
+  --r-xs: 4px;
+  --r-sm: 8px;
+  --r:    12px;
+  --r-lg: 18px;
   --r-pill: 999px;
 
-  --sh-1: 0 1px 2px rgba(10,10,10,.05);
-  --sh-2: 0 4px 16px rgba(10,10,10,.08);
-  --sh-3: 0 -8px 32px rgba(10,10,10,.12);
+  --sh-card: 0 1px 2px rgba(10,10,10,.04);
+  --sh-pop:  0 -10px 40px rgba(10,10,10,.14);
 
-  --pad: 16px;
-  --tabbar-h: 58px;
+  --gutter: 16px;
+  --tabbar: 56px;
   --ease: cubic-bezier(.22, .61, .36, 1);
-  --ease-spring: cubic-bezier(.34, 1.3, .64, 1);
+  --spring: cubic-bezier(.34, 1.26, .64, 1);
 
   --safe-t: env(safe-area-inset-top, 0px);
   --safe-b: env(safe-area-inset-bottom, 0px);
@@ -48,31 +49,32 @@
 html[data-theme="dark"] {
   color-scheme: dark;
 
-  --bg:         #0d0d0d;
-  --bg-sunken:  #000000;
-  --surface:    #161616;
-  --surface-2:  #1c1c1c;
-  --surface-3:  #232323;
+  --bg:        #0b0b0b;
+  --sunken:    #000000;
+  --surface:   #141414;
+  --surface-2: #191919;
+  --surface-3: #212121;
+  --packshot:  #171717;
 
-  --ink:        #f4f3f1;
-  --ink-2:      #d8d6d2;
-  --muted:      #9a9a9a;
-  --faint:      #6e6e6e;
+  --ink:   #f5f4f2;
+  --ink-2: #d9d7d3;
+  --muted: #9b9895;
+  --faint: #6a6763;
 
-  --line:       #272727;
-  --line-soft:  #1f1f1f;
+  --line:      #272523;
+  --line-soft: #1d1c1a;
 
-  --gold:       #d4b678;
-  --gold-ink:   #d4b678;
-  --gold-wash:  #1d1a13;
-  --sale:       #ff6a52;
-  --ok:         #4bbd8b;
+  --gold:      #cdae70;
+  --gold-ink:  #cdae70;
+  --gold-wash: #1b1811;
 
-  --on-ink:     #0a0a0a;
-  --scrim:      rgba(0, 0, 0, .66);
-  --blur-bg:    rgba(13, 13, 13, .82);
+  --sale: #e8614a;
+  --ok:   #4cbd8a;
 
-  --sh-1: 0 1px 2px rgba(0,0,0,.4);
-  --sh-2: 0 4px 16px rgba(0,0,0,.5);
-  --sh-3: 0 -8px 32px rgba(0,0,0,.6);
+  --on-ink: #0a0a0a;
+  --scrim:  rgba(0, 0, 0, .6);
+  --veil:   rgba(11, 11, 11, .86);
+
+  --sh-card: 0 1px 2px rgba(0,0,0,.4);
+  --sh-pop:  0 -10px 40px rgba(0,0,0,.6);
 }

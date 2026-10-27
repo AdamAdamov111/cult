@@ -1,59 +1,61 @@
-import { useEffect, useState } from 'react';
-import { money } from '../components/Primitives';
-import { IcCheck, IcCrown, IcSpark, IcTicket } from '../components/Icons';
-import { OFFERS, TOTAL_OFFER_VALUE } from '../data/offers';
-import { ON_SALE } from '../data/products';
-import { MEMBERSHIP_PRICE } from '../data/sections';
-import { useApp, useCartTotals } from '../store';
-import { useNav } from '../router';
-import { haptic, setMainButton } from '../lib/telegram';
+import { useState } from 'react';
+import { IcCheck, IcCrown, IcSpark, IcTruck } from '../components/Icons';
 import { DEMO_MODE, payMembership } from '../lib/payments';
-
-const PERKS = [
-  { t: 'Вся косметика BYRAIN −50% от РРЦ', d: `${ON_SALE.length} позиций: кремы, сыворотки, маски, ампулы. Клубная цена действует на весь ассортимент без исключений.` },
-  { t: 'Топ-бренды косметики по клубным ценам', d: 'Отобранные марки партнёров бренда — цены, которых нет в рознице.' },
-  { t: `${OFFERS.length} предложений партнёров в четырёх сферах`, d: 'Спорт, travel, красота и здоровье. Промокод, QR или заявка прямо в приложении.' },
-];
+import { money, useCart, useShop } from '../store';
+import { useNav } from '../router';
+import { BRANDS, MEMBERSHIP_PRICE, ON_SALE } from '../data/catalog';
 
 export function Join() {
-  const join = useApp((s) => s.join);
-  const totals = useCartTotals();
-  const isMember = useApp((s) => s.isMember());
+  const member = useShop((s) => s.isMember());
+  const join = useShop((s) => s.join);
+  const say = useShop((s) => s.say);
+  const cart = useCart();
   const { back, setTab } = useNav();
   const [busy, setBusy] = useState(false);
 
-  /* Главный пример выгоды — самый дорогой товар каталога */
   const flagship = [...ON_SALE].filter((p) => p.cat !== 'set').sort((a, b) => b.rrp - a.rrp)[0];
+
+  const perks = [
+    {
+      icon: <IcCrown size={17} />,
+      title: 'BYRAIN −50% от розничной цены',
+      text: `${ON_SALE.filter((p) => p.brandId === 'byrain').length} позиций: кремы, сыворотки, маски, ампулы. Клубная цена на весь ассортимент.`,
+    },
+    {
+      icon: <IcSpark size={17} />,
+      title: 'GREYMY −35%',
+      text: 'Профессиональный уход за волосами по ценам, которых нет в рознице.',
+    },
+    {
+      icon: <IcTruck size={17} />,
+      title: 'Бесплатная доставка от 15 000 ₽',
+      text: 'По Москве — на следующий день, по России — СДЭК.',
+    },
+  ];
 
   const pay = async () => {
     if (busy) return;
     setBusy(true);
-    haptic.press();
     const r = await payMembership();
     setBusy(false);
     if (r === 'cancelled') return;
-    if (r === 'failed') { useApp.getState().say('Оплата не прошла. Попробуйте ещё раз'); return; }
-    if (r === 'demo') join();              // демо-режим: активируем локально
-    else await useApp.getState().syncMembership();
-    totals.club > 0 ? setTab('cart') : back();
+    if (r === 'failed') { say('Оплата не прошла. Попробуйте ещё раз'); return; }
+    join();
+    if (cart.club > 0) setTab('cart'); else back();
   };
 
-  useEffect(() => {
-    if (isMember) return;
-    setMainButton({ text: `ОПЛАТИТЬ ${money(MEMBERSHIP_PRICE)} / МЕСЯЦ`, onClick: pay });
-    return () => setMainButton(null);
-  }, [isMember, busy, totals.club]);
-
-  if (isMember) {
+  if (member) {
     return (
       <div className="screen">
-        <div className="join-hero">
-          <div className="join-hero__glow" />
-          <div className="join-hero__mark">Cult</div>
-          <div className="join-hero__sub">Вы член клуба</div>
+        <div className="paywall">
+          <div className="paywall__glow" />
+          <div className="paywall__mark">Cult</div>
+          <div className="paywall__kicker">Вы член клуба</div>
         </div>
-        <div className="pad block--tight">
-          <button className="btn btn--primary btn--block btn--lg" onClick={() => setTab('home')}>Перейти к покупкам</button>
+        <div className="pad" style={{ marginTop: 20 }}>
+          <button className="btn btn--dark btn--block" onClick={() => setTab('catalog')}>
+            Перейти к покупкам
+          </button>
         </div>
       </div>
     );
@@ -61,48 +63,45 @@ export function Join() {
 
   return (
     <div className="screen">
-      <div className="join-hero">
-        <div className="join-hero__glow" />
-        <div className="join-hero__mark">Cult</div>
-        <div className="join-hero__sub">Закрытый клуб BYRAIN</div>
-        <div className="join-hero__claim">
-          Членство 3 000 ₽ в месяц<br />возвращает себя первой покупкой
+      <div className="paywall">
+        <div className="paywall__glow" />
+        <div className="paywall__mark">Cult</div>
+        <div className="paywall__kicker">Закрытый клуб BYRAIN</div>
+        <div className="paywall__claim">
+          Членство {money(MEMBERSHIP_PRICE)} в месяц<br />возвращает себя первой покупкой
         </div>
       </div>
 
-      {/* Персональная математика */}
-      {totals.club > 0 ? (
-        <div className="pad" style={{ marginTop: 16 }}>
-          <div className="saved-strip">
-            <IcSpark size={20} className="gold" />
-            <div style={{ lineHeight: 1.35, flex: 1 }}>
-              <div className="micro" style={{ color: 'var(--gold-ink)' }}>Экономия на вашей корзине</div>
-              <div className="saved-strip__v">{money(totals.saved)}</div>
-              <div className="micro">вместо {money(totals.rrp)} заплатите {money(totals.club)}</div>
+      {/* Личная математика */}
+      <div className="pad" style={{ marginTop: 18 }}>
+        <div className="save">
+          <IcSpark size={19} className="gold" />
+          {cart.club > 0 ? (
+            <div className="grow">
+              <div className="t-micro gold">Экономия на вашей корзине</div>
+              <div className="save__v">{money(cart.saved)}</div>
+              <div className="t-micro">вместо {money(cart.rrp)} заплатите {money(cart.club)}</div>
             </div>
-          </div>
-        </div>
-      ) : (
-        <div className="pad" style={{ marginTop: 16 }}>
-          <div className="saved-strip">
-            <IcSpark size={20} className="gold" />
-            <div style={{ lineHeight: 1.35, flex: 1 }}>
-              <div className="micro" style={{ color: 'var(--gold-ink)' }}>Пример выгоды</div>
-              <div className="h3" style={{ marginTop: 2 }}>{flagship.title}</div>
-              <div className="micro">{money(flagship.club)} в клубе вместо {money(flagship.rrp)} с полки — минус {money(flagship.rrp - flagship.club)}</div>
+          ) : flagship && (
+            <div className="grow">
+              <div className="t-micro gold">Пример выгоды</div>
+              <div className="t-h3" style={{ marginTop: 2 }}>{flagship.title}</div>
+              <div className="t-micro">
+                {money(flagship.club)} в клубе вместо {money(flagship.rrp)} — минус {money(flagship.rrp - flagship.club)}
+              </div>
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Что даёт членство */}
-      <div className="pad block--tight">
-        {PERKS.map((p, i) => (
+      <div className="pad" style={{ marginTop: 8 }}>
+        {perks.map((p, i) => (
           <div className="perk" key={i}>
-            <span className="perk__ic">{i === 0 ? <IcCrown size={18} /> : i === 1 ? <IcSpark size={18} /> : <IcTicket size={18} />}</span>
+            <span className="perk__i">{p.icon}</span>
             <div>
-              <div className="perk__t">{p.t}</div>
-              <div className="perk__d">{p.d}</div>
+              <div className="perk__t">{p.title}</div>
+              <div className="perk__d">{p.text}</div>
             </div>
           </div>
         ))}
@@ -110,37 +109,35 @@ export function Join() {
 
       {/* Цена */}
       <div className="pad">
-        <div className="plan-price">
-          <div className="plan-price__v">{money(MEMBERSHIP_PRICE)}</div>
-          <div className="plan-price__p">в месяц · автопродление · отмена в любой момент</div>
+        <div className="plan">
+          <div className="plan__v">{money(MEMBERSHIP_PRICE)}</div>
+          <div className="plan__p">в месяц · автопродление · отмена в любой момент</div>
         </div>
 
-        <button className="btn btn--gold btn--block btn--lg" style={{ marginTop: 16 }} onClick={pay} disabled={busy}>
-          {busy ? 'Оплата…' : `Вступить за ${money(MEMBERSHIP_PRICE)}`}
+        <button className="btn btn--gold btn--block" style={{ marginTop: 18 }} onClick={pay} disabled={busy}>
+          {busy ? 'Оформляем…' : `Вступить за ${money(MEMBERSHIP_PRICE)}`}
         </button>
 
-        <div className="col" style={{ gap: 7, marginTop: 14 }}>
+        <div className="col" style={{ gap: 9, marginTop: 18 }}>
           {[
             'Списание раз в месяц, отменить можно в профиле',
             'Доступ к клубным ценам открывается сразу',
-            `Суммарная выгода по предложениям партнёров — до ${money(TOTAL_OFFER_VALUE)} в год`,
+            `Два бренда в клубе: ${BRANDS.map((b) => b.title).join(' и ')}`,
           ].map((t) => (
-            <div className="row" key={t} style={{ alignItems: 'flex-start', gap: 8 }}>
-              <IcCheck size={14} className="gold" />
-              <span className="caption" style={{ flex: 1 }}>{t}</span>
+            <div className="row" key={t} style={{ alignItems: 'flex-start', gap: 9 }}>
+              <span className="gold" style={{ marginTop: 3, display: 'flex' }}><IcCheck size={14} /></span>
+              <span className="t-cap grow">{t}</span>
             </div>
           ))}
         </div>
 
         {DEMO_MODE && (
-          <div className="note" style={{ marginTop: 16 }}>
-            <span className="demo-tag">демо</span>{' '}
-            Платёжный контур не подключён: оплата имитируется, членство активируется локально.
-            Боевая оплата идёт через Telegram Payments на стороне бота.
+          <div className="note" style={{ marginTop: 18 }}>
+            Демо: платёжный контур не подключён, членство активируется локально.
           </div>
         )}
       </div>
-      <div style={{ height: 34 }} />
+      <div style={{ height: 40 }} />
     </div>
   );
 }
